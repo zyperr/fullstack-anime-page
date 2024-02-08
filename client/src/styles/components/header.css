@@ -1,0 +1,35 @@
+@import url("../base/var.css");
+.header{
+    background: var(--bg-color-header);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.header__logo{
+    margin: 0 10px;
+    padding: 5px 10px;
+}
+.header__nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header__ul{
+    display: flex;
+}
+
+.header__li{
+    margin: 0 10px;
+    padding: 5px 10px;
+}
+
+.header__navlink{
+    color: var(--text-color);
+}
+
+.header__navlink:hover{
+    color: var(--icon-colors);
+}
