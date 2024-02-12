@@ -1,15 +1,17 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,HTTPException,Depends
+from typing import Annotated
+from models.pagation import PaginationModel,pagination_params
 from config.db import collection_mangas as collection
 from schema.schemas import list_serial
+
 from models.anime import Anime
 
 
 mangasRouter = APIRouter()
 
 @mangasRouter.get("/api/mangas",tags=["mangas"])
-async def get_mangas(limit:int=10,skip:int=0):
-    mangas = list_serial(collection.find().skip(skip).limit(limit))
-    return mangas
+async def get_mangas(pagination:Annotated[PaginationModel,Depends(pagination_params)]):
+    return list_serial(collection.find({}).limit(pagination.perPage).skip((pagination.page-1)*pagination.perPage))
 
 
 @mangasRouter.post("/api/mangas",tags=["mangas"],response_model=Anime)

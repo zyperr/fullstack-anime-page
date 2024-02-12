@@ -1,13 +1,15 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,HTTPException,Depends
 from models.anime import Anime,AnimeUpdate
+from typing import Annotated
+from models.pagation import PaginationModel,pagination_params
 from services.db_utils_anime import save_anime,get_title,update_anime,delete_anime,get_one_anime
 from config.db import collection_anime as collection
 from schema.schemas import list_serial
 animeRouter = APIRouter()
  
 @animeRouter.get("/api/animes",tags=["animes"])
-async def get_animes(limit:int=10,skip:int=0,media:str="tv",status:str="finished_airing"):
-    return list_serial(collection.find({"media_type":media,"status":status}).skip(skip).limit(limit))
+async def get_animes(pagination:Annotated[PaginationModel,Depends(pagination_params)]):
+    return list_serial(collection.find({}).limit(pagination.perPage).skip((pagination.page-1)*pagination.perPage))
 
 @animeRouter.post("/api/animes",tags=["animes"],response_model=Anime)
 def create_anime(anime:Anime):

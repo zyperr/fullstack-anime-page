@@ -1,15 +1,17 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,HTTPException,Depends
+from typing import Annotated
 from config.db import collection_mw as collection
 from schema.schemas import list_serial
 from models.anime import Anime,AnimeUpdate
+from models.pagation import PaginationModel,pagination_params
+
 from services.db_utils_mw import delete_mw,update_mw,get_one_mw
 
 manhwasRouter = APIRouter()
 
 @manhwasRouter.get("/api/manhwas",tags=["manhwas"])
-async def get_manhwas(limit:int=10,skip:int=0):
-    manhwas = list_serial(collection.find().skip(skip).limit(limit))
-    return manhwas
+async def get_manhwas(pagination:Annotated[PaginationModel,Depends(pagination_params)]):
+    list_serial(collection.find({}).limit(pagination.perPage).skip((pagination.page-1)*pagination.perPage))
 
 
 @manhwasRouter.post("/api/manhwas",tags=["manhwas"],response_model=Anime)

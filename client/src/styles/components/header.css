@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    width: 100vw;
 }
 
 .header__logo{
@@ -17,6 +17,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .header__ul{
     display: flex;
 }
@@ -25,11 +26,17 @@
     margin: 0 10px;
     padding: 5px 10px;
 }
-
+.header__li-icons{
+    font-size: 20px;
+    font-weight: normal;
+}
 .header__navlink{
     color: var(--text-color);
+    font-weight: 600;
 }
 
 .header__navlink:hover{
     color: var(--icon-colors);
 }
+
+
