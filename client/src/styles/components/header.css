@@ -3,7 +3,7 @@
     background: var(--bg-color-header);
     color: var(--text-color);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 100vw;
 }

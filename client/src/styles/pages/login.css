@@ -1,0 +1,33 @@
+@import url("../base/var.css");
+.login{
+ background: var(--bg-color-header);
+ height: 100vh;
+}
+.login__banner{
+    height: 200px;
+    background: #d8d5d5;
+}
+.login__title{
+    color: var(--text-color);
+    text-align: left;
+    margin: 5px 0px 10px 10px;
+    padding: 5px;
+}
+.login__title-span{
+    color: var(--icon-colors);
+}
+.login__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 25px;
+    gap: 25px;
+}
+.login__form .container{
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+}
+.login__form .input{
+    width: 90%;
+}

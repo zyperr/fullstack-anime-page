@@ -1,9 +1,16 @@
 :root{
-    
     --text-color:#EAFDF8;
     --alternatives-text-color:#642CA9;
     --bg-color-header:#303030;
     --bg-items:#AFA2FF;
+    --label-color:#afa2ff;
     --details: #642CA9;
     --icon-colors:#F6E528;
+
+    --border-rad: 3px;
+    --padd-input: 10px;
+    
+    --btn-padding-mobile:7px 20px;
+    --btn-color-bg:#642CA9;
+    --btn-color-text:#EAFDF8;
 }

@@ -1,0 +1,7 @@
+@import url("../base/var.css");
+
+label{
+    font-size: 12px;
+    padding: 5px 0px;
+    color: var(--label-color);
+}

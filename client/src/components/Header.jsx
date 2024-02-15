@@ -21,11 +21,12 @@ export function Header() {
       <nav className="header__nav">
         <ul className="header__ul">
           {
-            routes.map(({name,path,icon}) => (
-              <li className="header__li" key={name}>
-                <NavLink to={path} title={name} className="header__navlink">{icon}</NavLink>
-              </li>
-            ))
+            routes.map(({name,path,icon}) => {
+                return <li className="header__li" key={name}>
+                  <NavLink to={path} title={name} className="header__navlink">{icon}</NavLink>
+                </li>
+              
+          })
           }
         </ul>
       </nav>
