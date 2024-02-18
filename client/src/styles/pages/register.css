@@ -1,57 +1,64 @@
 @import url("../base/var.css");
-.login{
+.register{
  background: var(--bg-color-header);
  height: 100vh;
 }
-.login__banner{
+.register__banner{
     height: 200px;
     background: #d8d5d5;
 }
-.login__title{
+.register__title{
     color: var(--text-color);
     text-align: left;
     margin: 5px 0px 10px 10px;
     padding: 5px;
 }
-.login__title-span{
+.register__title-span{
     color: var(--icon-colors);
 }
-.login__form{
+.register__form{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 25px;
 }
-.login__form .container{
+.register__form .container{
     display: flex;
     flex-flow: column wrap;
     align-items: center;
     width: 100%;
 }
-.login__form .container .label{
+.register__p-tip{
+    color: var(--alternatives-text-color);
+    font-size: 12px;
+    margin: 5px 0px;
+    padding: 5px 0px;
     width: 86%;
 }
-.login__form .input{
+.register__form .container .label{
+    width: 86%;
+}
+.register__form .input{
     width: 90%;
 }
 
 @media screen and (min-width: 768px){
-    .login__form{
+    .register__form{
         justify-content: center;
     }
-    .login__title{
+    .register__title{
         text-align: center;
     }
-    .login__form .container{
+    .register__form .container{
         width: unset;
         display: flex;
         align-items: flex-start;
     }
-    .login__form .container .label{
+    .register__form .container .label{
         width: 0;
         padding-left: 5px;
     }
-    .login__form .input{
+    .register__form .input{
         width: auto;
     }
 }
