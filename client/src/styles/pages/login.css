@@ -1,0 +1,65 @@
+@import url("../base/var.css");
+.login{
+ background: var(--bg-color-header);
+ height: 100vh;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.login__banner{
+    height: 200px;
+    background:  linear-gradient(0deg, rgba(0,0,0,0.712), rgba(0, 0, 1, 0.494)),url('../../assets//img/bannerLogin.jpg') center center;
+    background-size: cover;
+    width: 100%;
+}
+.login__title{
+    color: var(--text-color);
+    text-align: left;
+    margin: 5px 0px 10px 10px;
+    padding: 5px;
+}
+.login__title-span{
+    color: var(--icon-colors);
+}
+.login__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+.login__form .container-form{
+    display: flex;
+    flex-flow: column wrap;
+    /* align-items: center; */
+}
+/* .login__form .container-form .label{
+    width: 86%;
+}
+.login__form .input{
+    width: 90%;
+} */
+
+@media screen and (min-width: 768px){
+    .login__form{
+        justify-content: center;
+    }
+    .login__title{
+        text-align: center;
+    }
+    .login__form .container-form{
+        width: unset;
+        display: flex;
+        align-items: flex-start;
+    }
+    .login__form .container-form .label{
+        width: 0;
+        padding-left: 5px;
+    }
+    .login__form .input{
+        width: auto;
+    }
+}

@@ -1,0 +1,17 @@
+@import url("../base/var.css");
+
+
+.btn{
+    border: none;
+    border-radius: var(--border-rad);
+    padding: var(--btn-padding-mobile);
+    color: var(--btn-color-text);
+    background: var(--btn-color-bg);
+    cursor: pointer;
+    transition: opacity,transform 0.3s ease;
+}
+
+.btn:hover{
+    opacity: 0.7;
+    transform: scale(1.2);
+}

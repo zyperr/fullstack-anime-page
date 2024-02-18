@@ -3,9 +3,8 @@
     background: var(--bg-color-header);
     color: var(--text-color);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    width: 100vw;
 }
 
 .header__logo{
@@ -20,23 +19,66 @@
 
 .header__ul{
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header__li{
     margin: 0 10px;
     padding: 5px 10px;
+    position: relative;
 }
+.header__accordeon{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 30px;
+    right: -30px;
+    background: var(--bg-color-header);
+    opacity: 0;
+    visibility: hidden;
+    transition: opaciity 0.5s, visibility 0.5s, top 0.5s ease;
+}
+.header__accordeon.active{
+    opacity: 1;
+    visibility: visible;
+    top: 40px;
+    z-index: 1;
+    transition: opaciity 0.5s, visibility 0.5s, top 0.5s ease;
+    gap: 5px;
+    width: 85px;
+    border-radius: 0 0 3px 3px;
+}
+
 .header__li-icons{
     font-size: 20px;
     font-weight: normal;
+    cursor: pointer;
+}
+.header__li-icons.active{
+    color: var(--bg-items);
 }
 .header__navlink{
     color: var(--text-color);
     font-weight: 600;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    margin: 3px 0px;
+    transition: background 0.25s ease;
 }
 
-.header__navlink:hover{
-    color: var(--icon-colors);
+.header__accordeon.active .header__navlink:hover{
+    background: #434242;
 }
 
 
+
+.header__accordeon.active .header__navlink.active{
+    background: #434242;
+    border-radius: 0 0 3px 3px;
+    overflow: hidden;
+}
