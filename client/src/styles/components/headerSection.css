@@ -1,0 +1,36 @@
+@import url('../base/var.css');
+
+
+
+
+.header-section{
+    background-color: aqua;
+    margin: 1.5rem 0;
+}
+
+.header-section__nav{
+    display: flex;
+
+}
+
+.nav__list{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    overflow: scroll;
+}
+.nav__list-li{
+    padding: 1rem .5rem;
+    position: relative;
+}
+
+.nav__list-li::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 2px solid var(--details);
+    width: 100%;
+
+}
