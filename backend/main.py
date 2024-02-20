@@ -21,7 +21,8 @@ app.include_router(userRouter)
 
 origins = [
     frontend_url_local,
-    frontend
+    frontend,
+    "*"
 ]
 app.add_middleware(
     CORSMiddleware,

@@ -50,7 +50,7 @@ anime_validator = {
                 "description": "must be a string and is required"
             },
             "genres":{
-                "bsonType":["string"],
+                "bsonType":"array",
                 "description": "must be an array of string and is required",
             },
             "img_url":{
@@ -58,7 +58,7 @@ anime_validator = {
                 "description": "must be a string and is required"
             },
             "alternative_titles_synonyms":{
-                "bsonType": ["string"],
+                "bsonType": "array",
                 "description": "must be an array of string and is not required",
             }
         }
@@ -86,7 +86,7 @@ user_validator = {
                 "description": "must be a string and is required"
             },
             "favorites": {
-                "bsonType": ["string"],
+                "bsonType": "array",
                 "description": "must be an array of string and is not required"
             },
             "dark_mode": {

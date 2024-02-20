@@ -1,17 +1,20 @@
 @import url("../base/var.css");
 .register{
  background: var(--bg-color-header);
- height: 100vh;
+ height: 100%;
 }
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 }
 .register__banner{
-    height: 200px;
-    background: #d8d5d5;
+    height: 300px;
+    background:  linear-gradient(0deg, rgba(0,0,0,0.712), rgba(0, 0, 1, 0.494)),url('../../assets//img/manga-anime-collection-thumb.jpg') center center;
+    background-size: cover;
+    width: 100%;
 }
 .register__title{
     color: var(--text-color);
@@ -30,6 +33,9 @@
     display: flex;
     flex-flow: column wrap;
     width: 100%;
+}
+.register__p{
+    margin: 15px 0px;
 }
 .register__p-tip{
     color: var(--alternatives-text-color);

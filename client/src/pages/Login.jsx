@@ -5,6 +5,7 @@ import Btn from "../components/Btn"
 import { Paragraph } from "../components/Paragraph.jsx"
 import { NavLink } from "react-router-dom"
 import UseDocumentTitle from "../hooks/useDoctTitle.js"
+
 //todo Agregar una bonita imagen para el banner linea 10
 function Login() {
   UseDocumentTitle("Login - page")
@@ -18,11 +19,11 @@ function Login() {
 
           <div className="container-form">
             <Label text="Email" forHtml="email" />
-            <Input type="Email" id="email" placeholder="user@gmail.com" />
+            <input type="email" id="email" placeholder="user@gmail.com" className="input" />
           </div>
           <div className="container-form">
             <Label text="Password" forHtml="password" />
-            <Input type="password" id="password" placeholder="your password" />
+            <input type="password" id="Password" placeholder="******" className="input" />
           </div>
           <Btn text="Login" />
           <div className="container-form">

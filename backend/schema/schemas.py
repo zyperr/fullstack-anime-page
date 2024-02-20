@@ -7,7 +7,7 @@ def serial(anime) -> dict:
         "num_episodes": anime["num_episodes"],
         "genres": anime["genres"],
         'synopsis': anime["synopsis"],
-        "image_url": anime["image_url"],
+        "img_url": anime["img_url"],
         "alternative_titles_synonyms": anime["alternative_titles_synonyms"] 
     }
     
