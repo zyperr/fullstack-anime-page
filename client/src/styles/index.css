@@ -1,3 +1,14 @@
 @import url("./base/normalize.css");
 @import url("./base/var.css");
 
+
+input{
+    border-radius: var(--border-rad);
+    border: none;
+    padding: var(--padd-input);
+}
+input::placeholder{
+    opacity: 0.7;
+    font-size: 16px;
+    display: flex;
+}

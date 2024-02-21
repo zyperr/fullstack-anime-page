@@ -14,6 +14,7 @@ function AnimeDetails() {
     );
   }, []);
   console.log(data);
+  
   return (
     <section className="anime__section" style={{color:"#00000"}}>
       <div className="anime__poster"></div>

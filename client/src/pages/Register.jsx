@@ -1,5 +1,4 @@
 import Label from "../components/LabelComponent";
-import Input from "../components/InputComponent";
 import Btn from "../components/Btn";
 import { Paragraph } from "../components/Paragraph";
 import { NavLink } from "react-router-dom";
@@ -16,24 +15,16 @@ function Register() {
         </h2>
         <form className="register__form">
           <div className="container-form">
-            <Label text="Email" forHtml="email" />
-            <Input
-              type="Email"
-              id="email"
-              placeholder="Pepito200FullBox@gmail.com"
-            />
+            <Label text="Username" forHtml="username"  />
+            <input className="input"id="username" placeholder="Zyperr"/>
           </div>
           <div className="container-form">
             <Label text="Password" forHtml="password" />
-            <Input type="password" id="password" placeholder="your password" />
-            <Paragraph
-              className={"register__p-tip"}
-              text={"Your password must be at least 6 characters long"}
-            />
+            <input  className="input" id="password" placeholder="**********"/>
           </div>
           <div className="container-form">
             <Label text="Repeat password" forHtml="repeat-password" />
-            <Input type="password" id="repeat-password" placeholder="repeat your password" />
+            <input  className="input" id="repeat-password" placeholder="**********"/>
           </div>
           <Btn text="Register" />
           <div className="container-form">

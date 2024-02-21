@@ -1,5 +1,4 @@
 import "../styles/pages/login.css"
-import Input from "../components/InputComponent"
 import Label from "../components/LabelComponent"
 import Btn from "../components/Btn"
 import { Paragraph } from "../components/Paragraph.jsx"

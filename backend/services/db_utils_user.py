@@ -6,7 +6,7 @@ from schema.schemas import list_serial_users, serial_users
 from jose import jwt,JWTError
 from datetime import datetime,timedelta
 from passlib.context import CryptContext
-
+from middlewares.regex import verify_pattern_user_data
 
 SECRET_KEY = "83daa0256a2289b0fb23693bf1f6034d443966"
 ALGORITHM = "HS256"
@@ -20,6 +20,7 @@ oauth_2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 def verify_password(plain_password,hashed_password):
     return pwd_contenxt.verify(plain_password,hashed_password)
+
 
 
 def get_password_hash(password):
@@ -68,17 +69,32 @@ def get_one_user(username:str):
     return user
 
 def save_user(user):
+    user = verify_pattern_user_data(user)
     user["password"] = get_password_hash(user["password"])
     user_found =  collection.insert_one(user)
     created_user =  collection.find_one({"_id": user_found.inserted_id})
     return created_user
 
 def update_user(id:str,data):
-    user = {k:v for k,v in data.model_dump().items() if v is not None}
-    print(user)
-    collection.update_one({"_id":ObjectId(id)},{"$set":user})
-    document = collection.find_one({"_id":ObjectId(id)})
-    return document
+        user = {k:v for k,v in data.model_dump().items() if v is not None}
+        print(user)
+        collection.update_one({"_id":ObjectId(id)},{"$set":user})
+        document = collection.find_one({"_id":ObjectId(id)})
+        return document
+def add_favorite(id:str,item_id:str):
+    user = collection.find_one({"_id":ObjectId(id)})
+    if user:
+        collection.update_one({
+            "_id":ObjectId(id)
+        },
+        {
+            "$addToSet":{
+                "favorites":ObjectId(item_id)
+            }
+        })
+        return {"message":"Added to Favorites"}
+    else:
+        raise HTTPException(status_code=404, detail="User not found")
 
 def delete_user(id:str):
     if not collection.find_one({"_id":ObjectId(id)}):
