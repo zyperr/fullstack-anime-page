@@ -2,25 +2,39 @@
 
 //Todo agregar las demas peticiones http para los usuarios de la api
 function useApiUser() {
-  const getUsers = async (url) => {
+  const createToken = async (url,username,password) => {
     try {
-      const response = await fetch(url);
+      const params = 'grant_type=&username='+username+'&password='+password+'&scope=&client_id=&client_secret=';
+      const response = await fetch(url,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'accept': 'application/json'
+        },
+        body:params
+      });
       const data = await response.json();
-      return data;
+      return data
     }catch(error){
-      throw error
+      console.log(error)
     }
   }
-  const getUser = async (url,id) => {
+  const getAuthUser = async (url,token) => {
     try {
-      const response = await fetch(url,id);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      throw error;
+      const response = await fetch(url,{
+        method: 'GET',
+        headers:{
+          'Authorization':`Bearer ${token}`,
+          'accept': 'application/json',
+        }
+      })
+      const authUserData = await response.json();
+      return authUserData
+    }catch(error){
+      console.log(error)
     }
-  };
-  return {getUser,getUsers}
+  }
+  return {createToken,getAuthUser}
 }
 
 export {useApiUser}

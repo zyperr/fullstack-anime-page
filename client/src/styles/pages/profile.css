@@ -1,0 +1,28 @@
+@import url("../base/var.css");
+.profile{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+.profile__form{
+    display: flex;
+    flex-direction: column;
+}
+.profile__wrap{
+    display: flex;
+    align-items: center;
+}
+.profile__icon{
+    color: var(--text-color-alternative);
+    cursor: pointer;
+    font-size: 25px;
+    margin: 0px 10px;
+}
+.profile__icon:hover{
+    color: var(--hover-color)
+}
+.profile__input{
+    border: 2px solid grey;
+}

@@ -23,9 +23,8 @@ export function HomePage() {
       setDataAnimes(res);
     });
 
-  }, []);
+  },[]);
 
-  console.log(dataAnimes)
 
   return (
     <section>

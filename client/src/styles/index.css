@@ -2,13 +2,19 @@
 @import url("./base/var.css");
 
 
-input{
-    border-radius: var(--border-rad);
-    border: none;
-    padding: var(--padd-input);
-}
-input::placeholder{
-    opacity: 0.7;
-    font-size: 16px;
+.error{
+    color: tomato;
+    font-size: 12px;
+    padding-top: 5px;
     display: flex;
+    align-items: center;
+}
+
+.wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0 1rem;
+    gap: .5rem;
 }

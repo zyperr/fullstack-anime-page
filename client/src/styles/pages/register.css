@@ -44,12 +44,10 @@
     padding: 5px 0px;
     max-width: 200px;
 }
-/* .register__form .container .label{
-    width: 86%;
-}
+
 .register__form .input{
-    width: 90%;
-} */
+    border: black solid var(--alternatives-text-color);
+}
 
 @media screen and (min-width: 768px){
     .register__form{

@@ -50,7 +50,6 @@ def create_user(user:User):
         raise HTTPException(status_code=409,detail="Username has already taken")
     response = save_user(user.model_dump())
     if response:
-        print(response)
         return response
     raise HTTPException(status_code=400,detail="Error creating User")
 @userRouter.delete("/api/users/{id}",tags=["users"])

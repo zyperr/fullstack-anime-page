@@ -1,6 +1,6 @@
 :root{
     --text-color:#EAFDF8;
-    --text-color-alternative: #303030;
+    --text-color-alternative: #1c1c1c;
     --alternatives-text-color:#bb93eb;
     --bg-color-header:#303030;
     --bg-items:#AFA2FF;
@@ -9,7 +9,7 @@
     --icon-colors:#F6E528;
 
     --hover-color:#AFA2FF;
-    --border-rad: 3px;
+    --border-rad: 5px;
     --boorder-rad-card:.3rem;
     --padd-input: 10px;
     

@@ -77,7 +77,6 @@ def save_user(user):
 
 def update_user(id:str,data):
         user = {k:v for k,v in data.model_dump().items() if v is not None}
-        print(user)
         collection.update_one({"_id":ObjectId(id)},{"$set":user})
         document = collection.find_one({"_id":ObjectId(id)})
         return document

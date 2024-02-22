@@ -1,14 +1,7 @@
 @import url("../base/var.css");
 
 
-.wrap{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    margin: 1rem 0 1rem;
-    gap: .5rem;
-}
+
 
 .displayAnimes-section{
     display: flex;
