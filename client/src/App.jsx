@@ -15,7 +15,7 @@ function App() {
         <Route path='/user/login' element=<Login/>/>
         <Route path="user/register" element=<Register/>/>
         <Route path='/animes/:title/:id' element=<AnimeDetails/> />
-        <Route path='*' element=<h1>Not found 404</h1>/>
+        <Route path='*' element='error'/>
       </Routes>
     </BrowserRouter>
   )

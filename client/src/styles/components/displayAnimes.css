@@ -53,6 +53,8 @@
     width: 135px;
     overflow: hidden;
     white-space: nowrap;
+
+    text-transform: capitalize;
 }
 
 

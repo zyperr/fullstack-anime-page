@@ -3,26 +3,29 @@ import { Gallery } from "../components/gallery";
 import UseDocumentTitle from "../hooks/useDoctTitle.js";
 import { HeaderSection } from "../components/HeaderSection.jsx";
 import { DisplayAnimes } from "../components/DisplayAnimes.jsx";
-import imagen from '../assets/img/Hunter-x-HunterPortada1.jpg';
+import { useApiAnimes } from "../hooks/useApiAnimes.js";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+
+
+
+
 
 export function HomePage() {
   UseDocumentTitle("Home | look for animes,mangas and manhwas")
-  const animes = [
-    {
-      img: imagen,
-      title: "Hunter X Hunter",
-      id: "65d324be8cba87d76bf09009",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      img: imagen,
-      title: "Hunter X Hunter",
-      id: "65d328d38cba87d76bf0900a",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    }
-    ,
-  ]
+
+  const [dataAnimes, setDataAnimes] = useState([]);
+  const { getAnimes } = useApiAnimes()
+
+  useEffect(() => {
+    getAnimes("http://127.0.0.1:8000/api/animes/").then((res) => {
+      setDataAnimes(res);
+    });
+
+  }, []);
+
+  console.log(dataAnimes)
 
   return (
     <section>
@@ -31,15 +34,15 @@ export function HomePage() {
       <section>
         <HeaderSection />
         <div className="wrap">
-        {
-          animes.map(({ img, title, id, description}) => {
-            return (
-              <Link key={id} to={`/animes/${title}/${id}`}>
-                <DisplayAnimes img={img} title={title} description={description}/>
-              </Link>
-            )
-          })
-        }
+          {
+            dataAnimes.map((item) => {
+              return (
+                <Link key={item.title} to={`/animes/${item.title}/${item._id}`}>
+                  <DisplayAnimes img={item.img_url} title={item.title}></DisplayAnimes>
+                </Link>
+              )
+            })
+          }
         </div>
       </section>
     </section>

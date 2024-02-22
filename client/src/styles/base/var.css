@@ -1,5 +1,6 @@
 :root{
     --text-color:#EAFDF8;
+    --text-color-alternative: #303030;
     --alternatives-text-color:#bb93eb;
     --bg-color-header:#303030;
     --bg-items:#AFA2FF;
@@ -19,3 +20,4 @@
     --btn-color-bg:#642CA9;
     --btn-color-text:#EAFDF8;
 }
+

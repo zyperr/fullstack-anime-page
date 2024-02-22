@@ -1,0 +1,69 @@
+@import url('../base/var.css');
+
+.anime__section{
+    color: var(--text-color-alternative);
+}
+
+.anime__banner{
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    margin: .5rem 0 1rem;
+}
+
+.anime__details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 .8rem 0.5rem;
+}
+
+.anime__details-title{
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.anime__details-fav{
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    color: var(--alternatives-text-color);
+    font-size: 1.5rem;
+    transition: all .500ms ease;
+}
+
+.anime__details-fav:hover{
+    color: var(--details);
+    transform: scale(1.3);
+}
+
+.anime__details-status{
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: var(--alternatives-text-color);
+}
+
+
+.anime__synopsis{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.anime__synopsis h4{
+    font-size: 1.2rem;
+    color: var(--text-color-alternative);
+}
+
+
+.anime__synopsis-paragraph{
+    font-size: 1rem;
+    padding: 0 0 0 .5rem;
+    text-wrap: pretty;
+}

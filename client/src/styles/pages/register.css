@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    color: var(--text-color);
 }
 .register__banner{
     height: 300px;

@@ -3,6 +3,7 @@ import { useApiAnimes } from "../hooks/useApiAnimes";
 import { useEffect, useState } from "react";
 import { Paragraph } from "../components/Paragraph";
 import { FaHeart } from "react-icons/fa";
+import "../styles/components/animeDetails.css"
 function AnimeDetails() {
   const params = useParams();
   const [data, setData] = useState([]);
@@ -13,31 +14,31 @@ function AnimeDetails() {
       setData(res)
     );
   }, []);
+
   console.log(data);
-  
+
   return (
     <section className="anime__section" style={{color:"#00000"}}>
-      <div className="anime__poster"></div>
+      <div className="anime__banner" style={{backgroundImage:`url(${data.img_url})`}}></div>
       <div className="anime__details">
-        <h1 className="anime__details-title">{data.title}</h1>
-        <Paragraph text="Agregar a favoritos">
-          <FaHeart fontSize={20} />
+        <h2 className="anime__details-title">{data.title}</h2>
+        <Paragraph >
+          <FaHeart fontSize={20} className="anime__details-fav"/>
         </Paragraph>
-        <Paragraph text={data.status} />
+        <Paragraph text={data.status} className={"anime__details-status"}/>
       </div>
-      <article className="anime__genras">
-      {
-        data.genres.map((genre,index) => (
-          <Paragraph key={index} text={genre} />
-        ))
-      }
+      <article className="anime__genres">
+        {
+          
+        }
       </article>
       <article className="anime__synopsis">
-        <Paragraph text={data.synopsis} />
+        <h4>Synopsis</h4>
+        <Paragraph className={"anime__synopsis-paragraph"} text={data.synopsis} />
       </article>
-      <span>
-        {data.num_episodes}
-      </span>
+      <article className="anime__episodes">
+        {/* proximo a completar */}
+      </article>
     </section>
   );
 }
