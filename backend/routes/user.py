@@ -1,7 +1,9 @@
+from typing import Annotated
 from fastapi import APIRouter,HTTPException,Depends,HTTPException,status
 from config.db import collection_user as collection
+from models.pagation import PaginationModel, pagination_params
 from schema.schemas import list_serial_users,serial_users,serial_user_with_hash
-from models.user import User
+from models.user import User, UserUpdate
 from services.db_utils_user import add_favorite, delete_user,update_user,get_one_user,save_user,get_username,create_access_token,verify_user,ACCESS_TOKEN_EXPIRES_MINUTES,get_current_user
 from fastapi.security import OAuth2PasswordRequestForm
 from models.token import Token
@@ -23,15 +25,14 @@ def login_for_access_token(form_data:OAuth2PasswordRequestForm = Depends()):
 
 @userRouter.get("/users/me",tags=["users"])
 def read_users_me(current_user:User = Depends(get_current_user)):
-    user = serial_users(current_user)
-    return user
+    return serial_users(current_user)
 @userRouter.get("/users/me/items",tags=["users"])
 def read_own_items(current_user:User = Depends(get_current_user)):
     return serial_user_with_hash(current_user)
 
 @userRouter.get("/api/users",tags=["users"])
-def get_users(current_user:User = Depends(get_current_user)):
-    return list_serial_users(collection.find())
+def get_users(pagination:Annotated[PaginationModel,Depends(pagination_params)]):
+    return list_serial_users(collection.find().limit(pagination.perPage).skip((pagination.page-1)*pagination.perPage))
 
 @userRouter.get("/api/users/{username}",tags=["users"])
 def get_user(username:str):
@@ -60,14 +61,15 @@ def delete_user_endpoint(id:str, current_user:User = Depends(get_current_user)):
     raise HTTPException(status_code=404,detail=f"User Not found")
 
 @userRouter.put("/api/users/{id}",tags=["users"],)
-def update_anime(id:str,user:User,current_user:User = Depends(get_current_user)):
+def update_anime(id:str,user:UserUpdate,current_user:User = Depends(get_current_user)):
     response =  update_user(id,user)
     if response:
         return response
     raise HTTPException(status_code=400,detail="Error updating User")
 
-@userRouter.post("/api/users/favorites/{user_id}",tags=["users-favorites"])
-def favorites(user_id:str,item_id:str,current_user:User = Depends(get_current_user)):
+@userRouter.post("/api/users/favorites/{user_id}",tags=["users"])
+def favorites(item_id:str,current_user:User = Depends(get_current_user)):
+    user_id = str(current_user["_id"])
     response =  add_favorite(user_id,item_id)
     if response:
         return response

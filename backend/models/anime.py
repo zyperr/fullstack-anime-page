@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 
 class Anime(BaseModel):
     title: str
-    status: Optional[str] = Field(default="finished_airing | currently_airing")
+    status: Optional[str] = Field(default="finished airing | currently airing")
     media_type: str
     num_episodes: int = Field(ge=0, default=0)
     genres: List[str]
