@@ -1,7 +1,6 @@
 @import url("../base/var.css");
 .register{
  background: var(--bg-color-header);
- height: 100%;
 }
 .container{
     display: flex;
@@ -32,10 +31,11 @@
 .register__form .container-form{
     display: flex;
     flex-flow: column wrap;
-    width: 100%;
+    max-width: 300px;
+
 }
 .register__p{
-    margin: 15px 0px;
+    margin: 10px 0px;
 }
 .register__p-tip{
     color: var(--alternatives-text-color);
@@ -48,7 +48,14 @@
 .register__form .input{
     border: black solid var(--alternatives-text-color);
 }
-
+.register__error{
+    color: var(--color-error);
+    text-wrap: balance;
+    height: min-content;
+    font-size: 12px;
+    margin: 5px 0px;
+    max-width: 150px;
+}
 @media screen and (min-width: 768px){
     .register__form{
         justify-content: center;

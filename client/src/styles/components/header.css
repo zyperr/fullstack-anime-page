@@ -51,8 +51,9 @@
     width: 85px;
     border-radius: 0 0 3px 3px;
 }
-.header__profile{
-    
+.header__Link{
+    width: 100%;
+    padding-left: 5px;
 }
 .header__li-icons{
     font-size: 20px;

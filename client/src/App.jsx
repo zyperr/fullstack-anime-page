@@ -16,16 +16,17 @@ function App() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    getAuthUser(
-      "http://127.0.0.1:8000/users/me/items",
-      localStorage.getItem("token").toString()
-    ).then(({username,_id,role}) => setData({username,_id,role}));
+    if(localStorage.length !== 0) {
+      getAuthUser(
+        "http://127.0.0.1:8000/users/me/items",
+        localStorage.getItem("token").toString()
+      ).then(({username,_id,role}) => setData({username,_id,role}));
+    }
   }, []);
   const {username,_id} = data
   const isAuth = () => {
     return data.role !== undefined;
   }
-  console.log(data)
   return (
     <BrowserRouter>
       {isAuth() ? <HeaderAuth username={username} id={_id}/> : <Header />}

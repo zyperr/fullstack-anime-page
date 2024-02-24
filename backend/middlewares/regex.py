@@ -3,7 +3,7 @@ import re
 
 pattern_username = r'^[a-zA-Z0-9_]{3,16}$'
 pattern_pwd = r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$' 
-pattern_mail = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+pattern_mail = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
 
 
 def verify_pattern_user_data(data:dict):

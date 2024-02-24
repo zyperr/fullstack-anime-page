@@ -3,8 +3,8 @@ from fastapi import APIRouter,HTTPException,Depends,HTTPException,status
 from config.db import collection_user as collection
 from models.pagation import PaginationModel, pagination_params
 from schema.schemas import list_serial_users,serial_users,serial_user_with_hash
-from models.user import User, UserUpdate
-from services.db_utils_user import add_favorite, delete_user,update_user,get_one_user,save_user,get_username,create_access_token,verify_user,ACCESS_TOKEN_EXPIRES_MINUTES,get_current_user
+from models.user import UpdatePassword, User, UserUpdate
+from services.db_utils_user import add_favorite, delete_user, update_password,update_user,get_one_user,save_user,get_username,create_access_token,verify_user,ACCESS_TOKEN_EXPIRES_MINUTES,get_current_user
 from fastapi.security import OAuth2PasswordRequestForm
 from models.token import Token
 from datetime import timedelta
@@ -52,6 +52,7 @@ def create_user(user:User):
     if response:
         return response
     raise HTTPException(status_code=400,detail="Error creating User")
+
 @userRouter.delete("/api/users/{id}",tags=["users"])
 def delete_user_endpoint(id:str, current_user:User = Depends(get_current_user)):
     response =  delete_user(id)
@@ -74,3 +75,9 @@ def favorites(item_id:str,current_user:User = Depends(get_current_user)):
         return response
     raise HTTPException(status_code=400,detail="Error adding to Favorites")
 
+@userRouter.put("/api/users/changed-password/me",tags=["users changed password"])
+def update_pwd(user:UpdatePassword,current_user:User = Depends(get_current_user)):
+    response = update_password(current_user["_id"],user)
+    if response:
+        return response
+    raise HTTPException(status_code=400,detail="Error changing password")

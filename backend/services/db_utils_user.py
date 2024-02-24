@@ -100,3 +100,29 @@ def delete_user(id:str):
         raise HTTPException(status_code=404, detail="User not found")
     collection.delete_one({"_id":ObjectId(id)})
     return True
+
+
+def update_password(id:str,user):
+    userDb = collection.find_one({"_id":ObjectId(id)})
+    if userDb:
+        if verify_password(user.old_password,userDb["password"]):
+            if user.new_password == user.confirm_new_password:
+                new_password = get_password_hash(user.new_password)
+                collection.update_one(
+                    {
+                        "_id":ObjectId(id)
+                        
+                    },
+                    {
+                        "$set":{
+                            "password": new_password
+                        }
+                    }
+                )
+                return HTTPException(status_code=200, detail="Password changed")
+            else:
+                raise HTTPException(status_code=400, detail="Passwords don't match, try again")
+        else:
+            raise HTTPException(status_code=400, detail="Current password is incorrect")
+    else:
+        raise HTTPException(status_code=404, detail="User not found")

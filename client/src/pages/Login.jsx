@@ -4,23 +4,56 @@ import Btn from "../components/Btn";
 import { Paragraph } from "../components/Paragraph.jsx";
 import { NavLink } from "react-router-dom";
 import UseDocumentTitle from "../hooks/useDoctTitle.js";
-import { VscWarning } from "react-icons/vsc";
 import { useForm } from "react-hook-form";
-import {useApiUser} from "../hooks/useApiUser";
+import { useApiUser } from "../hooks/useApiUser";
+import { useState } from "react";
 function Login() {
   UseDocumentTitle("Login - page");
-  const {createToken} = useApiUser();
-  
+  const { createToken } = useApiUser();
+  const [modal, setModal] = useState({
+    state: false,
+    message: "",
+    isError:false
+  });
+
+  const errorMessage = {
+    incorrect: "Wrong username or password",
+    correct: " You have successfully logged in! \n You're being redirect to home",
+  };
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const onSubmit = handleSubmit(async (data) => {
-      await createToken("http://127.0.0.1:8000/token",data.username,data.password).then((data)=>{
-       localStorage.setItem("token",data.access_token)
-      })
+    const { tokenData, status } = await createToken(
+      "http://127.0.0.1:8000/token",
+      data.username,
+      data.password
+    );
+    console.log(status,tokenData)
+    if (status !== 200) {
+      setModal({ state: true, message: errorMessage.incorrect, isError:true });
+      setTimeout(() => {
+        setModal({ state: false, message: "" });
+      },5000)
+    }
+    if (tokenData === undefined || tokenData === null) return;
+    if (status === 200){
+      setModal({ state: true, message: errorMessage.correct, isError:false });
+      localStorage.setItem("token", tokenData.access_token);
+      setTimeout(() => {
+        setModal({ state: false, message: "" });
+        setTimeout(() => {
+          window.location.reload();
+          window.location.href = "/";          
+        }, 500);
+      },2000)
+    }
+    reset();
   });
+  
   return (
     <section className="login">
       <div className="container">
@@ -34,13 +67,12 @@ function Login() {
             <input
               type="text"
               id="username"
-              placeholder="user@gmail.com"
+              placeholder="canasta_heels2"
               className="input"
               {...register("username", { required: true })}
             />
             {errors.username && (
               <p className="error">
-                <VscWarning />
                 Username is required
               </p>
             )}
@@ -56,7 +88,6 @@ function Login() {
             />
             {errors.password && (
               <p className="error">
-                <VscWarning />
                 Password is required
               </p>
             )}
@@ -68,6 +99,14 @@ function Login() {
             </Paragraph>
           </div>
         </form>
+        <div className={modal.state ? "login__header-errors active" : "login__header-errors"}
+        style={{backgroundColor: modal.isError ? "var(--color-error)" : "var(--color-success)"}}>
+            <div className="login__header-errors-container">
+            <span>
+              {modal.message}
+            </span>
+            </div>
+        </div>
       </div>
     </section>
   );

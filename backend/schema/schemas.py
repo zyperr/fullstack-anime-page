@@ -31,9 +31,8 @@ def serial_user_with_hash (user):
         return {
         "_id":str(user["_id"]),
         "username": user["username"],
-        "hash_password": user["password"],
         "email": user["email"],
-        "favorites": [str(item) for item in user["favorites"]],       
+        "favorites": [str(item) for item in user["favorites"]],
         "role": user["role"],
         "darkmode": user["darkmode"]
     }
