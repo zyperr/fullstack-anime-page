@@ -27,7 +27,7 @@ export function HomePage() {
 
 
   return (
-    <section>
+    <section className="blur">
       <Gallery />
 
       <section>

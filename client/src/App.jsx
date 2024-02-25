@@ -20,16 +20,16 @@ function App() {
       getAuthUser(
         "http://127.0.0.1:8000/users/me/items",
         localStorage.getItem("token").toString()
-      ).then(({username,_id,role}) => setData({username,_id,role}));
+      ).then(({username,_id,role,avatar}) => setData({username,_id,role,avatar}));
     }
   }, []);
-  const {username,_id} = data
+  const {username,_id,avatar} = data
   const isAuth = () => {
     return data.role !== undefined;
   }
   return (
     <BrowserRouter>
-      {isAuth() ? <HeaderAuth username={username} id={_id}/> : <Header />}
+      {isAuth() ? <HeaderAuth avatar={avatar} username={username} id={_id}/> : <Header />}
       <Routes>
         <Route path="/" element=<HomePage /> />
         <Route path="/user/login" element=<Login /> />
