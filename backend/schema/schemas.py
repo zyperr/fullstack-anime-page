@@ -39,3 +39,4 @@ def serial_user_with_hash (user):
 def list_serial_users(users) -> list:
     return [serial_users(user) for user in users]
 
+

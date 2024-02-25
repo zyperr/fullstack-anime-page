@@ -4,6 +4,8 @@ from routes.anime import animeRouter
 from routes.manhwas import manhwasRouter
 from routes.mangas import mangasRouter
 from routes.user import userRouter
+from routes.statics import staticRouter
+from fastapi.staticfiles import StaticFiles
 import os
 from dotenv import load_dotenv
 
@@ -18,6 +20,7 @@ app.include_router(animeRouter)
 app.include_router(manhwasRouter)
 app.include_router(mangasRouter)
 app.include_router(userRouter)
+app.include_router(staticRouter)
 
 origins = [
     frontend_url_local,
@@ -32,6 +35,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.mount("/static",StaticFiles(directory="static"),name="static")
 
 @app.get("/")
 async def root():

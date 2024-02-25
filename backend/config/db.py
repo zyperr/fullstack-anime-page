@@ -15,8 +15,7 @@ db_user = client.user
 collection_anime= db["animes"]
 collection_mw = db["manhwas"]
 collection_mangas = db["mangas"]
-collection_img = db["images"]
-
+collection_img = db_user["banners"]
 collection_user = db_user["users"]
 
 collection_name = collection_anime.name
@@ -92,6 +91,14 @@ user_validator = {
             "dark_mode": {
                 "bsonType": "bool",
                 "description": "must be a bool and is not required"
+            },
+            "avatar": {
+                "bsonType": "string",
+                "description": "must be a string and is not required"
+            },
+            "banner_profile": {
+                "bsonType": "string",
+                "description": "must be a string and is not required"
             }
         }
     }

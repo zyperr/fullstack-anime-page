@@ -7,7 +7,10 @@ from jose import jwt,JWTError
 from datetime import datetime,timedelta
 from passlib.context import CryptContext
 from middlewares.regex import verify_pattern_user_data
+import random
 
+default_avatars = ["/static/avatars/avatar-default-1.png","/static/avatars/avatar-default-2.png","/static/avatars/avatar-default-3.png","/static/avatars/avatar-default-4.png","/static/avatars/avatar-default-5.png","/static/avatars/avatar-default-6.png"]
+default_banners = ["/static/banners/default-banner-1.png","/static/banners/default-banner-2.png","/static/banners/default-banner-3.png","static/banners/default-banner-4.png"]
 SECRET_KEY = "83daa0256a2289b0fb23693bf1f6034d443966"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRES_MINUTES = 30
@@ -70,6 +73,8 @@ def get_one_user(username:str):
 
 def save_user(user):
     user = verify_pattern_user_data(user)
+    user["avatar"] = random.choice(default_avatars)
+    user["banner_profile"] = random.choice(default_banners)
     user["password"] = get_password_hash(user["password"])
     user_found =  collection.insert_one(user)
     created_user =  collection.find_one({"_id": user_found.inserted_id})
