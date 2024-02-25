@@ -1,1 +1,182 @@
 @import url("../base/var.css");
+
+.profile{
+    height: 100vh;
+    color: var(--text-color-alternative);
+}
+.profile__header__account{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.profile__account-info{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 0px 5px;
+    padding: 5px 10px;
+    gap: 10px;
+    position: relative;
+}
+
+
+.profile__banner{
+    display: flex;
+    position: relative;
+}
+.profile__banner:hover .editable-banner{
+    display: flex;
+    overflow: hidden;
+}
+
+.editable-banner{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    animation: fade-in 250ms ease;
+}
+.editable-banner .btn{
+    opacity: 1;
+}
+.editable-banner__text{
+    color: var(--text-color);
+    padding: 5px 15px;
+    border-radius: var(--border-rad);
+    border: 1px solid var(--text-color);
+}
+.profile__banner-edit{
+    align-items: center;
+    background-color: #4a4e58;
+    border-radius: 50%;
+    display: flex;
+    height: 1.5rem;
+    justify-content: center;
+    width: 1.5rem;
+    z-index: 1;
+    border: 0.125rem solid #302f2f;
+    bottom: 8px;
+    box-sizing: initial;
+    position: absolute;
+    right: 10px;
+    padding: 5px;
+}
+.profile__banner-img{
+    height: 7.5rem;
+    overflow: hidden;
+    width: 100%;    
+    object-fit: cover;
+}
+.profile__account-picture{
+    display: flex;
+}
+.profile__avatar-wrapper{
+    cursor: pointer;
+    flex: 0 0 auto;
+    height: 5rem;
+    margin-right: 5px;
+    margin-top: -0.875rem;
+    position: relative;
+    width: 5rem;
+}
+
+.profile__avatar{
+    position: absolute;
+    bottom: 5px;
+}
+
+.profile__account-img{
+    border-radius: 100%;
+    position: relative;
+}
+.profile__account-img:hover .editable-avatar{
+    display: flex;
+    overflow: hidden;
+}
+.editable-avatar{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    border-radius: 100%;
+    animation: fade-in 250ms ease;
+}
+.editable-avatar__text{
+    color: var(--text-color);
+    padding: 3px 10px;
+    border: 1px solid var(--text-color);
+    border-radius: var(--border-rad);
+}
+.profile__avatar-edit{
+    align-items: center;
+    background-color: #4a4e58;
+    border-radius: 50%;
+    display: flex;
+    height: 1.5rem;
+    justify-content: center;
+    width: 1.5rem;
+    z-index: 1;
+    border: 0.125rem solid #302f2f;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    box-sizing: initial;
+}
+.profile__avatar-edit-icon{
+    margin: 3px;
+    width: 1em;
+    height: 1em;
+    color: var(--text-color);
+}
+
+.profile__user-wrapper{
+    display: flex;
+    align-items: flex-start;
+    padding-left: 1em;
+}
+
+.profile__name{
+    font-size: 1.5rem;
+    margin-top: 0.5em;
+}
+
+
+@media screen and (min-width: 768px){
+    .profile__account-info{
+        padding-inline:4.5rem;
+    }
+    .profile__banner-img{
+        height: 15rem;
+    }
+}
+
+@media (prefers-color-scheme:dark){
+    .profile{
+        background-color: var(--bg-color-header);
+        color: var(--text-color);
+    }
+}
+
+
+@keyframes fade-in {
+    from{
+        display: none;
+        opacity: 0
+    }
+    to{
+        display: flex;
+        opacity: 1
+    }
+}
+

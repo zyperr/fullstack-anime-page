@@ -8,7 +8,7 @@ from routes.statics import staticRouter
 from fastapi.staticfiles import StaticFiles
 import os
 from dotenv import load_dotenv
-
+import uvicorn
 load_dotenv()
 
 app = FastAPI()
@@ -42,3 +42,5 @@ async def root():
     return {"message": "Hello World"}
 
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)

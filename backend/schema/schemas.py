@@ -24,7 +24,9 @@ def serial_users (user):
         "email": user["email"],
         "favorites": [str(item) for item in user["favorites"]],       
         "role": user["role"],
-        "darkmode": user["darkmode"]
+        "darkmode": user["darkmode"],
+        "avatar": user["avatar"],
+        "banner_profile": user["banner_profile"]
     }
 
 def serial_user_with_hash (user):
@@ -34,7 +36,9 @@ def serial_user_with_hash (user):
         "email": user["email"],
         "favorites": [str(item) for item in user["favorites"]],
         "role": user["role"],
-        "darkmode": user["darkmode"]
+        "darkmode": user["darkmode"],
+        "avatar": user["avatar"],
+        "banner_profile": user["banner_profile"]
     }
 def list_serial_users(users) -> list:
     return [serial_users(user) for user in users]
