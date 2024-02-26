@@ -1,9 +1,8 @@
-import "../styles/components/modal.css"
 // eslint-disable-next-line react/prop-types
-function Modal({className,message,state}) {
+function Modal({children,className}) {
   return (
-    <div className={state ? `${className} show` : `${className}`}>
-        <p className="modal__text">{message}</p>
+    <div className={className}>
+        {children}
     </div>
   )
 }

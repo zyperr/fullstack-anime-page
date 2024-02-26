@@ -9,8 +9,9 @@ from passlib.context import CryptContext
 from middlewares.regex import verify_pattern_user_data
 import random
 
-default_avatars = ["/static/avatars/avatar-default-1.png","/static/avatars/avatar-default-2.png","/static/avatars/avatar-default-3.png","/static/avatars/avatar-default-4.png","/static/avatars/avatar-default-5.png","/static/avatars/avatar-default-6.png"]
-default_banners = ["/static/banners/default-banner-1.png","/static/banners/default-banner-2.png","/static/banners/default-banner-3.png","static/banners/default-banner-4.png"]
+default_avatars = ["/static/avatars/avatar-default-1.webp","/static/avatars/avatar-default-2.webp","/static/avatars/avatar-default-3.webp","/static/avatars/avatar-default-4.webp","/static/avatars/avatar-default-5.webp","/static/avatars/avatar-default-6.webp"]
+default_banners = ["/static/banners/default-banner-1.webp","/static/banners/default-banner-2.webp","/static/banners/default-banner-3.webp","static/banners/default-banner-4.webp"]
+
 SECRET_KEY = "83daa0256a2289b0fb23693bf1f6034d443966"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRES_MINUTES = 30

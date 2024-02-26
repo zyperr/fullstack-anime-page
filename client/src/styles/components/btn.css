@@ -8,10 +8,17 @@
     color: var(--btn-color-text);
     background: var(--btn-color-bg);
     cursor: pointer;
-    transition: opacity,transform 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .btn:hover{
     opacity: 0.7;
-    transform: scale(1.2);
+}
+
+.btn:disabled{
+    opacity: unset;
+    cursor: auto;
+    color: #59595b;
+    background: transparent;
+    border: 1px solid #59595b;
 }

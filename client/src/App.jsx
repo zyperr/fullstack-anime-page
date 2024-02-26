@@ -20,22 +20,22 @@ function App() {
       getAuthUser(
         "http://127.0.0.1:8000/users/me/items",
         localStorage.getItem("token").toString()
-      ).then(({username,_id,role,avatar}) => setData({username,_id,role,avatar}));
+      ).then((data) => setData(data));
     }
   }, []);
-  const {username,_id,avatar} = data
+  const userInfo = data
   const isAuth = () => {
     return data.role !== undefined;
   }
   return (
     <BrowserRouter>
-      {isAuth() ? <HeaderAuth avatar={avatar} username={username} id={_id}/> : <Header />}
+      {isAuth() ? <HeaderAuth data={userInfo}/> : <Header />}
       <Routes>
         <Route path="/" element=<HomePage /> />
         <Route path="/user/login" element=<Login /> />
         <Route path="user/register" element=<Register /> />
         <Route path="/animes/:title/:id" element=<AnimeDetails /> />
-        <Route path="/user/profile/:name/:id" element=<Profile /> />
+        <Route path="/user/profile/:name/:id" element=<Profile data={userInfo} /> />
         <Route path="*" element="error" />
       </Routes>
     </BrowserRouter>

@@ -5,7 +5,7 @@ import { FaHome } from "react-icons/fa";
 import { CiBookmark, CiLogout } from "react-icons/ci";
 import { useState } from "react";
 
-function HeaderAuth({ username, id, avatar}) {
+function HeaderAuth({data}) {
   const [open, setOpen] = useState(false)
   function handleClick() {
     setOpen(!open)
@@ -27,11 +27,11 @@ function HeaderAuth({ username, id, avatar}) {
           </li>
         </ul>
         <ul className="header__ul headerAuth__ul">
-          <li className="header__li header__li--hover" onClick={handleClick}><img src={`http://127.0.0.1:8000${avatar}`} className="headerAuth__avatar"/></li>
+          <li className="header__li header__li--hover" onClick={handleClick}><img src={data.avatar} className="headerAuth__avatar"/></li>
           <div className={open ? "headerAuth__accordion" : 'headerAuth__accordion hideMenu bodyblur'}>
             <li className="header__navlink headerAuth__navlink">
-              <Link className="headerAuth__navlink" to={`/user/profile/${username}/${id}`}>
-                <img className="headerAuth__avatar" src={`http://127.0.0.1:8000${avatar}`} />
+              <Link className="headerAuth__navlink" to={`/user/profile/${data.username}/${data._id}`}>
+                <img className="headerAuth__avatar" src={data.avatar} />
                 <span>My account</span>
               </Link>
             </li>

@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import "../styles/components/btn.css"
-function Btn({text,fn}) {
-  const handleSubmit = (e) => {
+function Btn({text,fn,isDisabled}) {
+  const handleEvent = (e) => {
+    console.log(e)
     fn(e)    
   }
   return (
-    <button className="btn" onSubmit={handleSubmit}>
+    <button className="btn" onClick={handleEvent} disabled={isDisabled}>
         {text}
     </button>
   )
