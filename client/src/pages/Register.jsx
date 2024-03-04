@@ -1,11 +1,12 @@
 import Label from "../components/LabelComponent";
-import Btn from "../components/Btn";
+import SingInBtn from "../components/Btn";
 import { Paragraph } from "../components/Paragraph";
 import { NavLink } from "react-router-dom";
 import UseDocumentTitle from "../hooks/useDoctTitle";
 import "../styles/pages/register.css";
 import { useForm } from "react-hook-form";
 import { useApiUser } from "../hooks/useApiUser";
+import { useState } from "react";
 function Register() {
   UseDocumentTitle("Register - page");
   const {
@@ -16,7 +17,7 @@ function Register() {
     reset,
     setError
   } = useForm();
-
+  const [succed, setSucced] = useState({ isError: false, isSuccess: false, message: "" });
   const { createUser } = useApiUser();
 
   const onSubmit = handleSubmit(async (data) => {
@@ -26,18 +27,19 @@ function Register() {
       email,
       password,
     };
-    await createUser("http://127.0.0.1:8000/api/users", user).then((a) => {
-      const {res,userData} = a;
-      console.log(res,userData)
+    await createUser(user).then((a) => {
+      const {userData,status} = a;
+      console.log(status,userData)
 
-      if(res === 400){
-        console.log("error")
-      }else if(res === 409){
+      if(status === 400){
+        setSucced({isError:true, isSuccess:false, message:userData.detail})
+      }else if(status === 409){
         setError("username", {
           type: "manual",
           message: userData.detail
         })
-      }else if(res === 201 || res === 200){
+      }else if(status === 201 || status === 200){
+        setSucced({isError:false, isSuccess:true, message:"Account has been created successfully. You're being redirect to login."})
         setTimeout(() => {
           reset();
           window.location.reload();
@@ -157,7 +159,7 @@ function Register() {
               <p className="register__error">{errors.repeatPassword.message}</p>
             )}
           </div>
-          <Btn text="Register" />
+          <SingInBtn text="Register" fn={() => {}} isDisabled={false}/>
           <div className="container-form">
             <Paragraph
               className={"register__p"}
@@ -167,6 +169,12 @@ function Register() {
             </Paragraph>
           </div>
         </form>
+        {succed.isSuccess && (
+          <p className="profile__message-pwd --success">{succed.message}</p>
+        )}
+        {succed.isError && (
+          <p className="profile__message-pwd --error">{succed.message}</p>
+        )}
       </div>
     </section>
   );

@@ -56,6 +56,14 @@
     margin: 5px 0px;
     max-width: 150px;
 }
+.register__correct{
+    color: var(--color-success);
+    text-wrap: balance;
+    height: min-content;
+    font-size: 12px;
+    margin: 5px 0px;
+    max-width: 150px;
+}
 @media screen and (min-width: 768px){
     .register__form{
         justify-content: center;

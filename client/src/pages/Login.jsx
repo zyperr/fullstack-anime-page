@@ -1,6 +1,6 @@
 import "../styles/pages/login.css";
 import Label from "../components/LabelComponent";
-import Btn from "../components/Btn";
+import LogInBtn from "../components/Btn";
 import { Paragraph } from "../components/Paragraph.jsx";
 import { NavLink } from "react-router-dom";
 import UseDocumentTitle from "../hooks/useDoctTitle.js";
@@ -92,7 +92,7 @@ function Login() {
               </p>
             )}
           </div>
-          <Btn text="Login" />
+          <LogInBtn text="Login" />
           <div className="container-form">
             <Paragraph className={"login__p"} text={"Don't have an account? "}>
               <NavLink to="/user/login">Register</NavLink>

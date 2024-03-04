@@ -1,10 +1,10 @@
 from typing import Annotated
-from fastapi import APIRouter,HTTPException,Depends,HTTPException,status
+from fastapi import APIRouter,HTTPException,Depends,HTTPException
 from config.db import collection_user as collection
 from models.pagation import PaginationModel, pagination_params
 from schema.schemas import list_serial_users,serial_users,serial_user_with_hash
-from models.user import UpdatePassword, User, UserUpdate
-from services.db_utils_user import add_favorite, delete_user, update_password,update_user,get_one_user,save_user,get_username,create_access_token,verify_user,ACCESS_TOKEN_EXPIRES_MINUTES,get_current_user
+from models.user import UpdatePassword, User
+from services.db_utils_user import add_favorite, delete_user, update_avatar_profile, update_password,get_one_user,save_user,get_username,create_access_token,verify_user,ACCESS_TOKEN_EXPIRES_MINUTES,get_current_user,update_banner_profile
 from fastapi.security import OAuth2PasswordRequestForm
 from models.token import Token
 from datetime import timedelta
@@ -53,21 +53,27 @@ def create_user(user:User):
         return response
     raise HTTPException(status_code=400,detail="Error creating User")
 
-@userRouter.delete("/api/users/{id}",tags=["users"])
-def delete_user_endpoint(id:str, current_user:User = Depends(get_current_user)):
-    response =  delete_user(id)
+@userRouter.delete("/api/users/me",tags=["users"])
+def delete_user_endpoint(current_user:User = Depends(get_current_user)):
+    response =  delete_user(current_user["_id"])
     if response:
         return "User deleted"
     raise HTTPException(status_code=404,detail=f"User Not found")
 
-@userRouter.put("/api/users/{id}",tags=["users"],)
-def update_anime(id:str,user:UserUpdate,current_user:User = Depends(get_current_user)):
-    response =  update_user(id,user)
+@userRouter.put("/api/users/banner/me",tags=["users"],)
+def update_banner(banner:str,current_user:User = Depends(get_current_user)):
+    response =  update_banner_profile(current_user["_id"],banner)
     if response:
         return response
-    raise HTTPException(status_code=400,detail="Error updating User")
+    raise HTTPException(status_code=400,detail="Error updating banner")
+@userRouter.put("/api/users/avatar/me",tags=["users"])
+def update_avatar(avatar:str = dict,current_user:User = Depends(get_current_user)):
+    response = update_avatar_profile(current_user["_id"],avatar)
+    if response:
+        return response
+    raise HTTPException(status_code=400,detail="Error updating avatar")
 
-@userRouter.post("/api/users/favorites/{user_id}",tags=["users"])
+@userRouter.post("/api/users/favorites/me",tags=["users"])
 def favorites(item_id:str,current_user:User = Depends(get_current_user)):
     user_id = str(current_user["_id"])
     response =  add_favorite(user_id,item_id)

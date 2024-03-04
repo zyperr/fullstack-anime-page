@@ -9,7 +9,8 @@ from passlib.context import CryptContext
 from middlewares.regex import verify_pattern_user_data
 import random
 
-default_avatars = ["/static/avatars/avatar-default-1.webp","/static/avatars/avatar-default-2.webp","/static/avatars/avatar-default-3.webp","/static/avatars/avatar-default-4.webp","/static/avatars/avatar-default-5.webp","/static/avatars/avatar-default-6.webp"]
+server_url = "http://127.0.0.1:8000"
+default_avatars = ["/static/avatars/default-avatar-1.webp","/static/avatars/default-avatar-2.webp","/static/avatars/default-avatar-3.webp","/static/avatars/default-avatar-4.webp","/static/avatars/default-avatar-5.webp","/static/avatars/default-avatar-6.webp"]
 default_banners = ["/static/banners/default-banner-1.webp","/static/banners/default-banner-2.webp","/static/banners/default-banner-3.webp","static/banners/default-banner-4.webp"]
 
 SECRET_KEY = "83daa0256a2289b0fb23693bf1f6034d443966"
@@ -74,18 +75,46 @@ def get_one_user(username:str):
 
 def save_user(user):
     user = verify_pattern_user_data(user)
-    user["avatar"] = random.choice(default_avatars)
-    user["banner_profile"] = random.choice(default_banners)
+    user["avatar"] = server_url + random.choice(default_avatars)
+    user["banner_profile"] = server_url + random.choice(default_banners)
     user["password"] = get_password_hash(user["password"])
+    user["role"] = "user"
     user_found =  collection.insert_one(user)
     created_user =  collection.find_one({"_id": user_found.inserted_id})
     return created_user
 
-def update_user(id:str,data):
-        user = {k:v for k,v in data.model_dump().items() if v is not None}
-        collection.update_one({"_id":ObjectId(id)},{"$set":user})
-        document = collection.find_one({"_id":ObjectId(id)})
-        return document
+    
+def update_banner_profile(id:str,banner):
+    userDb = collection.find_one({"_id":ObjectId(id)})
+    if userDb:
+            collection.update_one(
+                {
+                    "_id":ObjectId(id)
+                },
+                {
+                    "$set":{
+                        "banner_profile":banner
+                    }
+                }
+            )
+    return True
+
+def update_avatar_profile(id:str,avatar) -> bool:
+    userDb = collection.find_one({"_id":ObjectId(id)})
+    if userDb:
+            collection.update_one(
+                
+                {
+                    "_id":ObjectId(id)
+                },
+                {
+                    "$set":{
+                        "avatar":avatar
+                    }
+                }
+            )
+    return True
+
 def add_favorite(id:str,item_id:str):
     user = collection.find_one({"_id":ObjectId(id)})
     if user:
@@ -97,7 +126,7 @@ def add_favorite(id:str,item_id:str):
                 "favorites":ObjectId(item_id)
             }
         })
-        return {"message":"Added to Favorites"}
+        return {"message":"it has been added to Favorites"}
     else:
         raise HTTPException(status_code=404, detail="User not found")
 
@@ -105,7 +134,7 @@ def delete_user(id:str):
     if not collection.find_one({"_id":ObjectId(id)}):
         raise HTTPException(status_code=404, detail="User not found")
     collection.delete_one({"_id":ObjectId(id)})
-    return True
+    return HTTPException(status_code=200, detail="User has been deleted")
 
 
 def update_password(id:str,user):

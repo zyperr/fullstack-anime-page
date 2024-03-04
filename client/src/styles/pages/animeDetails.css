@@ -20,7 +20,7 @@
 .anime__back_btn.show{
     opacity: 1;
     visibility: visible;
-    transform: translateY(0px);
+    transform: translateY(60px);
     margin:unset;
 }
 /**/

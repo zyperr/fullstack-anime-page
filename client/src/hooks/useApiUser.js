@@ -1,10 +1,9 @@
 /* eslint-disable no-useless-catch */
 //Todo agregar las demas peticiones http para los usuarios de la api
-import { useEffect, useState } from "react";
 function useApiUser() {
-  const createUser = async (url,data) => {
+  const createUser = async (data) => {
     try{
-      const response = await fetch(url,{
+      const response = await fetch("http://127.0.0.1:8000/api/users",{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -13,7 +12,7 @@ function useApiUser() {
         ,body:JSON.stringify(data)
       })
       const userData = await response.json();
-      return {userData,res:response.status}
+      return {userData,status:response.status}
     }catch(error){
       console.log(error)
     }  
@@ -42,10 +41,11 @@ function useApiUser() {
         headers:{
           'Authorization':`Bearer ${token}`,
           'accept': 'application/json',
-        }
+          "Content-Type": "application/json"
+        },
       })
       const authUserData = await response.json();
-      return authUserData
+      return {authUserData,status:response.status}
     }catch(error){
       console.log(error)
     }
@@ -59,8 +59,81 @@ function useApiUser() {
       console.log(error)
     }
   }
-  return {createToken,getAuthUser,createUser,getBanners}
+  const putBanner = async (src,token) => {
+    try{
+      const response = await fetch(`http://127.0.0.1:8000/api/users/banner/me?banner=${src}`,{
+        method: 'PUT',
+        headers:{
+          'accept': 'application/json',
+          'Authorization':`Bearer ${token}`,
+        },
+      })
+      const userData = await response.json();
+      return {userData,res:response.status}
+    }catch(error){
+      console.log(error)
+    }
+  }
+  const putAvatar = async (src,token) => {
+    try{
+      const response = await fetch(`http://127.0.0.1:8000/api/users/avatar/me?avatar=${src}`,{
+        method: 'PUT',
+        headers:{
+          'accept': 'application/json',
+          'Authorization':`Bearer ${token}`,
+        },
+      })
+      const userData = await response.json();
+      return {userData,res:response.status}
+    }catch(error){
+      console.log(error)
+    }
+  }
+  const getAvatars = async (url) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    }catch(error){
+      console.log(error)
+    }
+  }
+  const changePassword =async  (token,userData) => {
+    try{
+      const response = await fetch(`http://127.0.0.1:8000/api/users/changed-password/me`,{
+        method: 'PUT',
+        headers:{
+          'Content-Type': 'application/json',
+          'accept': 'application/json',
+          'Authorization':`Bearer ${token}`,
+        },
+        body:JSON.stringify(userData)
+      })
+      const data = await response.json();
+      return {user:data.detail,res:response.status}
+    }catch(error){
+      console.log(error)
+    }
+  }
+  const deleteUser = async () => {
+    try{
+      const response = await fetch(`http://127.0.0.1:8000/api/users/me`,{
+        method:"DELETE",
+        headers:{
+          'Content-Type': 'application/json',
+          'accept': 'application/json',
+          'Authorization':`Bearer ${localStorage.getItem("token")}`,
+        }        
+      })
+      const data = await response.json();
+      return {user:data.detail,res:response.status}
+    }catch(error){
+      console.log(error)
+    }
+  }
+  return {createToken,getAuthUser,createUser,getBanners,putAvatar,putBanner,getAvatars,changePassword,deleteUser}
 }
+
 
 
 export {useApiUser}

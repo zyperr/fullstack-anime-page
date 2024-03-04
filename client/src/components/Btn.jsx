@@ -2,7 +2,6 @@
 import "../styles/components/btn.css"
 function Btn({text,fn,isDisabled}) {
   const handleEvent = (e) => {
-    console.log(e)
     fn(e)    
   }
   return (

@@ -1,8 +1,9 @@
 @import url("../base/var.css");
 
 .profile{
-    height: 100vh;
+    height: 100%;
     color: var(--text-color-alternative);
+    padding-bottom: 10px;
 }
 .profile__header__account{
     display: flex;
@@ -67,6 +68,7 @@
     position: absolute;
     right: 10px;
     padding: 5px;
+    cursor: pointer;
 }
 .profile__banner-img{
     height: 7.5rem;
@@ -154,6 +156,7 @@
 
 .profile__modal{
     display: none;
+    visibility: hidden;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -167,6 +170,7 @@
 }
 .profile__modal.active{
     display: flex;
+    visibility: visible;
     opacity: 1;
     animation: fade-in 250ms ease;
 }
@@ -181,11 +185,24 @@
     border-radius: var(--border-rad);
     overflow: hidden;
     overflow-y: scroll;
+    position: relative;
+}
+.profile__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 .profile__banner-btn-wrapper{
     display: flex;
+    align-items: center;
     width: calc(100% - 10rem);
     flex-direction: column;
+}
+.profile__banner-btn-container{
+    display: flex;
+    gap: 20px;
+
 }
 .profile__banner-text{
     text-align: center;
@@ -220,6 +237,7 @@
     cursor: pointer;
     aspect-ratio: 21/9;
     position: relative;
+    
 }
 .selectable-area{
     position: absolute;
@@ -237,13 +255,255 @@
     object-fit: cover;
     border-radius: var(--border-rad);
 }
-@media screen and (min-width: 768px){
+
+
+.profile__banner-close{
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    padding: 5px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.profile__banner-close .btn{
+    padding: unset;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Modal de los avatar*/
+
+.profile__modal-avatar{
+    display: none;
+    visibility: hidden;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    opacity: 0;
+}
+.profile__modal-avatar.active{
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    animation: fade-in 250ms ease;
+}
+.profile__modal-avatar .profile__wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 32px 0px 0px 0px;
+}
+.profile__modal-avatar .profile__banner{
+    width: unset;
+    align-items: center;
+}
+
+.profile__modal-avatar .profile__banner-img{
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    height: 5.5rem;
+}
+.profile__modal-avatar .profile__banner-btn-wrapper{
+    flex-flow: column wrap;
+    align-items: center;
+    gap: 10px;
+    width: unset;
+}
+.profile__modal-avatar .profile__banner-text{
+    font-size: 15px;
+}
+.profile__modal-avatar .profile__banner-btn-container{
+    display: flex;
+    gap: 10px;
+    flex-direction: row-reverse;
+}
+.profile__modal-avatar .profile__banners-item{
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+}
+.profile__modal-avatar  .profile__banners-img{
+    border-radius: 100%;
+}
+.profile__modal-avatar  .selectable-area{
+    border-radius: 100%;
+}
+.profile__modal-avatar .profile__banners-item.active .selectable-area{
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+
+/*Opciones del prefil*/
+.profile__option{
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
+}
+.profile__option-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:calc(100% - 20rem);
+}
+.profile__title{
+    width: 100%;
+    text-align: left;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-wrap: balance;
+}
+.profile__title-icon{
+    color: var(--icon-colors);
+    font-size: 25px;
+}
+.profile__title-icon.--delete{
+    color: var( --color-error);
+}
+.profile__form{
+    display: flex;
+    gap: 10px;
+    flex-flow: column wrap;
+    max-width: 175px;
+}
+.profile__form .btn{
+    margin: 14px 0px;
+}
+
+.profile__option-delete{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile__error{
+    text-wrap: balance;
+    color: var(--color-error);
+}
+.profile__message-pwd{
+    position: fixed;
+    text-wrap: balance;
+    text-align: center;
+    color: var(--text-color-alternative);
+    padding: 10px;
+    border-radius: var(--border-rad);
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    opacity: 0;
+    display: none;
+    animation: fade-in 250ms ease;
+    z-index: 1;
+}
+.profile__message-pwd.--success{
+    display: flex;
+    opacity: 1;
+    background: var(--color-success);
+    color: var(--text-color-alternative);
+    
+}
+.profile__message-pwd.--error{
+    display: flex;
+    opacity: 1;
+    font-weight: 400;
+    color: var(--text-color);
+    background: var(--color-error);
+}
+
+/*Modal para borrar cuenta*/
+.profile__container-delete{
+    opacity: 0;
+    display: none;
+    animation: fade-in 250ms ease;
+}
+.profile__container-delete.active{
+    display: flex;
+    opacity: 1;
+}
+.profile__container-delete .profile__container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile__container-delete .profile__title{
+    text-align: center;
+}
+.profile__container-btn{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 0px;
+}
+
+.profile__input-confirm{
+    text-align: center;
+    text-wrap: balance;
+    color: var(--color-success);
+    font-size: 14px;
+    font-weight: 600;
+    max-width: 200px;
+}
+@media screen and (max-width: 600px){
+    .profile__option-container {
+        width: calc(100% - 5rem);
+    }
+}
+@media screen and (min-width: 600px){
     .profile__account-info{
         padding-inline:4.5rem;
+    }
+    .profile__banner-btn-wrapper{
+        flex-flow: row wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .profile__wrapper{
+        width: 100%;
+    }
+    .profile__banner{
+        width: 100%;
     }
     .profile__banner-img{
         height: 15rem;
     }
+    .profile__modal-container{
+        width: calc(100% - 5rem);
+        height: calc(100% - 10rem);
+    }
+    .profile__banners-item{
+        height: calc(115px + 6.5rem);
+    }
+    .profile__modal-avatar .profile__banners-item{
+        height: 115px;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .profile__modal-container {
+        width: calc(100% - 10rem);
+        height: calc(100% - 5rem);
+    }
+    .profile__banner-img{
+        height: 20rem;
+    }
+
 }
 
 @media (prefers-color-scheme:dark){
@@ -264,4 +524,3 @@
         opacity: 1
     }
 }
-

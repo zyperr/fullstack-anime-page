@@ -3,17 +3,20 @@ import "../styles/components/header.css";
 import { Link, NavLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { CiBookmark, CiLogout } from "react-icons/ci";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { IoMdArrowDropdown } from "react-icons/io";
+
 import { useState } from "react";
 
-function HeaderAuth({data}) {
-  const [open, setOpen] = useState(false)
+function HeaderAuth({ data }) {
+  const [open, setOpen] = useState(false);
   function handleClick() {
-    setOpen(!open)
+    setOpen(!open);
   }
   function logout() {
-    localStorage.removeItem('token')
-    window.location.reload()
-    window.location.href = "/"
+    localStorage.removeItem("token");
+    window.location.reload();
+    window.location.href = "/";
   }
   return (
     <header className="header">
@@ -27,28 +30,49 @@ function HeaderAuth({data}) {
           </li>
         </ul>
         <ul className="header__ul headerAuth__ul">
-          <li className="header__li header__li--hover" onClick={handleClick}><img src={data.avatar} className="headerAuth__avatar"/></li>
-          <div className={open ? "headerAuth__accordion" : 'headerAuth__accordion hideMenu bodyblur'}>
+          <div className={open ? "bg-blur" : "bg-blur hideMenu"}></div>
+          <li className="header__li header__li--hover" onClick={handleClick}>
+            <img src={data.avatar} className="headerAuth__avatar" />
+            <IoMdArrowDropdown className="header__li-icons"/>
+          </li>
+          <div
+            className={
+              open
+                ? "headerAuth__accordion"
+                : "headerAuth__accordion hideMenu bodyblur"
+            }
+          >
             <li className="header__navlink headerAuth__navlink">
-              <Link className="headerAuth__navlink" to={`/user/profile/${data.username}/${data._id}`}>
+              <NavLink
+                className="headerAuth__navlink"
+                to={`/user/profile/${data.username}/${data._id}`}
+              >
                 <img className="headerAuth__avatar" src={data.avatar} />
-                <span>My account</span>
-              </Link>
+                <span>{data.username}</span>
+              </NavLink>
             </li>
 
             <li className="header__navlink headerAuth__navlink">
-              <Link className="headerAuth__navlink" to={""}>
-                <CiBookmark className="header__li-icons"/>
+              <NavLink className="headerAuth__navlink" to={""}>
+                <CiBookmark className="header__li-icons" />
                 <span>Favorite</span>
-              </Link>
+              </NavLink>
             </li>
 
             <li className="header__navlink headerAuth__navlink">
               <Link className="headerAuth__navlink" onClick={logout}>
-                <CiLogout className="header__li-icons"/>
+                <CiLogout className="header__li-icons" />
                 <span>Logout</span>
               </Link>
             </li>
+            {data.role === "admin" && (
+              <li className="header__navlink headerAuth__navlink">
+                <Link className="headerAuth__navlink" to="/admin">
+                  <MdOutlineAdminPanelSettings className="header__li-icons" />
+                  <span>Admin</span>
+                </Link>
+              </li>
+            )}
           </div>
         </ul>
       </nav>

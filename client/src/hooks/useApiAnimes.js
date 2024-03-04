@@ -27,7 +27,23 @@ function useApiAnimes() {
         throw error
     }
   }
-  return { getAnimes, getAnime };
+  const addToFavorites = async (url,token,itemId) => {
+    try {
+      const response = await fetch(`${url}?item_id=${itemId}`,{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+          'accept': 'application/json',
+          'Authorization':`Bearer ${token}`
+        },
+      })
+      const data = await response.json();
+      return {data,res:response.status}
+    }catch(error){
+        console.log(error)
+    }
+  }
+  return { getAnimes, getAnime,addToFavorites };
 }
 
 export { useApiAnimes };

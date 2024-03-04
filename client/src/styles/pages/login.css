@@ -44,6 +44,12 @@
     transform: translateY(59px);;
     opacity: 1;
 }
+.login__header-errors.active span{
+    color: var(--text-color);
+    text-align: center;
+    text-wrap: balance;
+    padding: 5px;
+}
 .login__banner{
     height: 200px;
     background:  linear-gradient(0deg, rgba(0,0,0,0.712), rgba(0, 0, 1, 0.494)),url('../../assets//img/bannerLogin.jpg') center center;
@@ -106,6 +112,7 @@
     text-wrap: balance;
     text-align: center;
 }
+
 
 @media screen and (min-width: 768px){
     .login__form{

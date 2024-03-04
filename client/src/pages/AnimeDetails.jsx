@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { Paragraph } from "../components/Paragraph";
 import { FaHeart } from "react-icons/fa";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
-import "../styles/components/animeDetails.css";
+import "../styles/pages/animeDetails.css";
 import { Link } from "react-router-dom";
 function AnimeDetails() {
   const params = useParams();
   const [data, setData] = useState([]);
-  const { getAnime } = useApiAnimes();
+  const { getAnime,addToFavorites } = useApiAnimes();
   const [showBackBar, setShowBackBar] = useState(false);
 
   // Un pequeño evento del scroll
@@ -31,7 +31,14 @@ function AnimeDetails() {
       setData(res)
     );
   }, []);
-
+  const handleFavorite = async () => {
+    const {data,res}= await addToFavorites("http://127.0.0.1:8000/api/users/favorites/me",localStorage.getItem("token").toString(), params.id);
+    if (res === 200) {
+        console.log(data.message)
+    }else if(res === 401){
+      console.log(data.message)
+    }
+  }
   return (
     <section className="anime__section" style={{ color: "#00000" }}>
       {/* Este es el componente afectado por el efecto de scroll*/}
@@ -45,7 +52,7 @@ function AnimeDetails() {
       <div className="anime__details">
         <h2 className="anime__details-title">{data.title}</h2>
         <Paragraph>
-          <FaHeart fontSize={20} className="anime__details-fav" />
+          <FaHeart fontSize={20} className="anime__details-fav" onClick={handleFavorite}/>
         </Paragraph>
         <Paragraph text={data.status} className={"anime__details-status"} />
       </div>
