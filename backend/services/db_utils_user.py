@@ -1,4 +1,5 @@
 from config.db import collection_user as collection
+from config.db import collection_anime as collection_anime
 from fastapi import HTTPException,Depends
 from fastapi.security import OAuth2PasswordBearer
 from bson import ObjectId
@@ -117,13 +118,14 @@ def update_avatar_profile(id:str,avatar) -> bool:
 
 def add_favorite(id:str,item_id:str):
     user = collection.find_one({"_id":ObjectId(id)})
+    item = collection_anime.find_one({"_id":ObjectId(item_id)})
     if user:
         collection.update_one({
             "_id":ObjectId(id)
         },
         {
             "$addToSet":{
-                "favorites":ObjectId(item_id)
+                "favorites":item
             }
         })
         return {"message":"it has been added to Favorites"}
