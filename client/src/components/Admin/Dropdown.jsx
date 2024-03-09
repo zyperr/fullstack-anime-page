@@ -20,7 +20,7 @@ export const Dropdown = ({id}) => {
             <li><Link to={`/admin/animes/${id}/title`} className="dropdown-link">Title</Link></li>
             <li><Link to={`/admin/animes/${id}/status`} className="dropdown-link">Status</Link></li>
             <li><Link to={`/admin/animes/${id}/media_type`} className="dropdown-link">Media type</Link></li>
-            <li><Link to={`/admin/animes/${id}/episodes`} className="dropdown-link">Episodes</Link></li>
+            <li><Link to={`/admin/animes/${id}/num_episodes`} className="dropdown-link">Episodes</Link></li>
             <li><Link to={`/admin/animes/${id}/genres`} className="dropdown-link">Genres</Link></li>
             <li><Link to={`/admin/animes/${id}/synopsis`} className="dropdown-link">Synopsis</Link></li>
           </ul>

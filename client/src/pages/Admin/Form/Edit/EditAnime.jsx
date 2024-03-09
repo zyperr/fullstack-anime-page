@@ -27,6 +27,7 @@ export const EditAnime = () => {
   }
   return (
     <section className="edit">
+
       <FormEdit anime={anime} disabled={disabled} id={params.id} name={params.name}/>
     </section>
   );

@@ -25,7 +25,7 @@ function useApiAnimes() {
         body:JSON.stringify(item)
       })
       const data = await response.json();
-      return {response:data,res:response.status}
+      return {detail:data,res:response.status}
     }catch(error){
       console.log(error)
     }

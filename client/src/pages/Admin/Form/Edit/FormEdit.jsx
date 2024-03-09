@@ -2,18 +2,64 @@
 import { useForm } from "react-hook-form";
 import { useApiAnimes } from "../../../../hooks/useApiAnimes";
 import { useState } from "react";
-export const FormEdit = ({ anime, disabled, id,name }) => {
+export const FormEdit = ({ anime, disabled, id, name }) => {
   const { putAnime } = useApiAnimes();
-  const { register, handleSubmit,setValue } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [show, setShow] = useState(false);
+  const [error, setError] = useState({
+    state: false,
+    message: "",
+    isError: false,
+  });
   const onSubmit = handleSubmit(async (data) => {
+    if (data.genres) {
+      data.genres = data.genres.split(",");
+    }
     const putData = {
       ...data,
+    };
+    const { res } = await putAnime(
+      "http://127.0.0.1:8000/api/animes/",
+      id,
+      putData
+    );
+    if (res !== 200) {
+      setError({ state: true, message: "Something went wrong", isError: true });
+      setTimeout(() => {
+        setError({ state: false, message: "" });
+      }, 5000);
     }
-    console.log(putData)
+    if (res === 200) {
+      setError({
+        state: true,
+        message: "Anime has been updated",
+        isError: false,
+      });
+      setTimeout(() => {
+        setError({ state: false, message: "" });
+        setTimeout(() => {
+          window.location.reload();
+          window.location.href = `/admin/panel`;
+        }, 500);
+      }, 2000);
+    }
   });
   return (
     <form className="edit__form" onSubmit={onSubmit}>
+      <div
+        className={
+          error.state ? "login__header-errors active" : "login__header-errors"
+        }
+        style={{
+          backgroundColor: error.isError
+            ? "var(--color-error)"
+            : "var(--color-success)",
+        }}
+      >
+        <div className="login__header-errors-container">
+          <span>{error.message}</span>
+        </div>
+      </div>
       <label className="label" htmlFor="title">
         Title
       </label>
@@ -90,15 +136,13 @@ export const FormEdit = ({ anime, disabled, id,name }) => {
         className="btn"
         type="button"
         onClick={() => {
-          setValue(name, anime[name]);
+          setValue(`${name}`, anime[`${name}`]);
           setShow(true);
         }}
       >
         Get Value
       </button>
-      {show && (
-        <input type="submit" value="Edit" className="btn" />
-      )}
+      {show && <input type="submit" value="Edit" className="btn" />}
     </form>
   );
 };
