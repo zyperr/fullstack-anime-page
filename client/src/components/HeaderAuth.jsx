@@ -67,7 +67,7 @@ function HeaderAuth({ data }) {
             </li>
             {data.role === "admin" && (
               <li className="header__navlink headerAuth__navlink">
-                <Link className="headerAuth__navlink" to="/admin">
+                <Link className="headerAuth__navlink" to="/admin/panel">
                   <MdOutlineAdminPanelSettings className="header__li-icons" />
                   <span>Admin</span>
                 </Link>

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { BrowserRouter, Routes, Route, Router} from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
@@ -10,6 +10,8 @@ import { useApiUser } from "./hooks/useApiUser";
 import { useState,useEffect } from "react";
 import { HeaderAuth } from "./components/HeaderAuth";
 import {Profile} from "./pages/Profile"
+import { AdminPanel } from "./pages/Admin/AdminPanel.jsx";
+import { EditAnime } from "./pages/Admin/Form/Edit/EditAnime";
 function App() {
   const { getAuthUser } = useApiUser();
   const [data, setData] = useState({});
@@ -46,6 +48,8 @@ function App() {
         <Route path="user/register" element=<Register /> />
         <Route path="/animes/:title/:id" element=<AnimeDetails />  />
         <Route path="/user/profile/:username/:id" element=<Profile data={userInfo} />/>
+        <Route path="/admin/panel" element=<AdminPanel /> />
+        <Route path="/admin/animes/:id/:name" element=<EditAnime /> />
         <Route path="*" element="error" />
       </Routes>
     </BrowserRouter>

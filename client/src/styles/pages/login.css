@@ -1,7 +1,6 @@
 @import url("../base/var.css");
 .login{
  background: var(--bg-color-header);
- padding-bottom:20px;
 }
 .container{
     display: flex;
@@ -41,7 +40,7 @@
 }
 
 .login__header-errors.active{
-    transform: translateY(59px);;
+    transform: translateY(69px);
     opacity: 1;
 }
 .login__header-errors.active span{
@@ -51,7 +50,7 @@
     padding: 5px;
 }
 .login__banner{
-    height: 200px;
+    height: 253px;
     background:  linear-gradient(0deg, rgba(0,0,0,0.712), rgba(0, 0, 1, 0.494)),url('../../assets//img/bannerLogin.jpg') center center;
     background-size: cover;
     width: 100%;
@@ -81,38 +80,16 @@
     border: 1px solid var(--text-color);
 }
 
-.login__modal{
-    transform: translateY(20px);
-    opacity: 0;
-    visibility: hidden;
-    transition: transform,opacity,visibility 1s ease;
-}
-.login__modal.show{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0px);
-    top: 5px;
-    left: -5px;
-    width: 200px;
-    height: 150px;
-    background: rgba(175, 162, 255, 0.71);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(9.5px);
-    -webkit-backdrop-filter: blur(9.5px);
-    border: 1px solid rgba(175, 162, 255, 0.19);
-}
+
 .login__modal-text{
     color: var(--text-color-alternative);
     font-weight: bold;
     text-wrap: balance;
     text-align: center;
 }
-
+.login__p{
+    padding: 10px 0px;
+}
 
 @media screen and (min-width: 768px){
     .login__form{

@@ -1,7 +1,7 @@
 from fastapi import APIRouter,HTTPException,Depends
 from models.anime import Anime,AnimeUpdate
 from typing import Annotated
-from models.pagation import PaginationModel,pagination_params
+from models.pagation import PaginationModel,pagination_params,get_pagination
 from services.db_utils_anime import save_anime,get_title,update_anime,delete_anime,get_one_anime
 from config.db import collection_anime as collection
 from schema.schemas import list_serial
@@ -9,8 +9,11 @@ animeRouter = APIRouter()
  
 @animeRouter.get("/api/animes",tags=["animes"])
 async def get_animes(pagination:Annotated[PaginationModel,Depends(pagination_params)]):
-    return list_serial(collection.find({}).limit(pagination.perPage).skip((pagination.page-1)*pagination.perPage))
+    animes =  list_serial(collection.find({}).limit(pagination.perPage).skip((pagination.page-1)*pagination.perPage))
+    return get_pagination(pagination.page,pagination.perPage,pagination.next,pagination.prev,animes,"api/animes")
 
+
+    
 @animeRouter.post("/api/animes",tags=["animes"],response_model=Anime)
 def create_anime(anime:Anime):
     
@@ -33,8 +36,8 @@ async def get_anime(id:str):
     raise HTTPException(status_code=404,detail=f"Anime Not found")
 
 @animeRouter.put("/api/animes/{id}",tags=["animes"],response_model=AnimeUpdate)
-async def update_anime(id:str,anime:AnimeUpdate):
-    response = await update_anime(id,anime)
+async def put_anime(id:str,anime:AnimeUpdate):
+    response =  await update_anime(id,anime)
     if response:
         return response
     raise HTTPException(status_code=400,detail="Error updating Anime")

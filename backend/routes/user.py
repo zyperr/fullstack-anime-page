@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter,HTTPException,Depends,HTTPException
 from config.db import collection_user as collection
-from models.pagation import PaginationModel, pagination_params
+from models.pagation import PaginationModel, get_pagination, pagination_params
 from schema.schemas import list_serial_users,serial_users,serial_user_with_hash
 from models.user import UpdatePassword, User
 from services.db_utils_user import add_favorite, delete_user, update_avatar_profile, update_password,get_one_user,save_user,get_username,create_access_token,verify_user,ACCESS_TOKEN_EXPIRES_MINUTES,get_current_user,update_banner_profile
@@ -32,7 +32,8 @@ def read_own_items(current_user:User = Depends(get_current_user)):
 
 @userRouter.get("/api/users",tags=["users"])
 def get_users(pagination:Annotated[PaginationModel,Depends(pagination_params)]):
-    return list_serial_users(collection.find().limit(pagination.perPage).skip((pagination.page-1)*pagination.perPage))
+    user =  list_serial_users(collection.find().limit(pagination.perPage).skip((pagination.page-1)*pagination.perPage))
+    return get_pagination(pagination.page,pagination.perPage,pagination.next,pagination.prev,user,"api/users")
 
 @userRouter.get("/api/users/{username}",tags=["users"])
 def get_user(username:str):

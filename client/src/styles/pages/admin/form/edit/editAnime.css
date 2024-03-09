@@ -1,0 +1,26 @@
+.edit{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: column wrap;
+    padding-bottom: 15px;
+}
+.edit p {
+    font-size: 18px;
+    font-weight: 600;
+}
+.edit__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.edit__form textarea{
+    resize: vertical;
+    width: auto;
+}
+.edit__form .input:disabled{
+    background-color: #e4e0e0;
+}

@@ -9,12 +9,27 @@ function useApiAnimes() {
       if (!response.ok) {
         throw Error(data.message);
       }
-      return data;
+      return {pag:data.pages,animes:data.result};
     } catch (error) {
       throw error;
     }
   };
-
+  const putAnime = async (url,id,item) => {
+    try {
+      const response = await fetch(`${url}${id}`,{
+        method: 'PUT',
+        headers:{
+          'Content-Type': 'application/json',
+          'accept': 'application/json',
+        },
+        body:JSON.stringify(item)
+      })
+      const data = await response.json();
+      return {response:data,res:response.status}
+    }catch(error){
+      console.log(error)
+    }
+  }
   const getAnime = async (url,id) => {
     try {
       const response = await fetch(url+id);
@@ -43,7 +58,16 @@ function useApiAnimes() {
         console.log(error)
     }
   }
-  return { getAnimes, getAnime,addToFavorites };
+  const getSlider = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/slider");
+      const data = await response.json();
+      return {data:data,res:response.status}
+    }catch(error){
+        console.log(error)
+    }
+  }
+  return { getAnimes, getAnime,addToFavorites,getSlider,putAnime };
 }
 
 export { useApiAnimes };

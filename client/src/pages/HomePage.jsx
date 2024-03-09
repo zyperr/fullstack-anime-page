@@ -1,5 +1,5 @@
 import "../styles/pages/homepage.css";
-import { Gallery } from "../components/gallery";
+import { Gallery } from "../components/home/Gallery.jsx";
 import UseDocumentTitle from "../hooks/useDoctTitle.js";
 import { HeaderSection } from "../components/HeaderSection.jsx";
 import { DisplayAnimes } from "../components/DisplayAnimes.jsx";
@@ -19,15 +19,14 @@ export function HomePage() {
   const { getAnimes } = useApiAnimes()
 
   useEffect(() => {
-    getAnimes("http://127.0.0.1:8000/api/animes/").then((res) => {
-      setDataAnimes(res);
+    getAnimes("http://127.0.0.1:8000/api/animes/").then(({animes}) => {
+      setDataAnimes(animes);
     });
 
   },[]);
 
-
   return (
-    <section className="blur">
+    <section className="home">
       <Gallery />
 
       <section>

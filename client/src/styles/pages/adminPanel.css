@@ -1,0 +1,54 @@
+@import url("../base/var.css");
+.admin-panel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.admin-panel__table-row-header{
+    background: var(--bg-color-header);
+    color: var(--text-color);
+}
+.admin-panel__table-row-header th{
+    padding: 10px 0px;
+    width: calc(100px + 10px);
+}
+.admin-panel__span{
+    padding: 0 5px;
+    margin: 0 5px;
+    text-wrap: balance;
+    text-align: center;
+}
+.admin-panel__synopsis{
+    max-width: 150px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.admin-panel__table-body{
+    margin: 10px 0px;
+    border-radius: var(--border-rad);
+    color: var(--text-color-alternative);
+}
+.admin-panel__table-row td{
+    background-color: var(--bg-items);
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+    text-transform: capitalize;
+}
+.admin-panel__table-row td:nth-of-type(1) img{
+    width: 100%;
+    object-fit: contain;
+}
+.admin-panel__table-row td:nth-of-type(2){
+    height: 80px;
+    text-align: left;
+}
+
+.admin-panel__link{
+    color: var(--text-color-alternative);
+    font-weight: bold;
+    padding: 5px 10px;
+}
