@@ -1,9 +1,16 @@
-@import url("../base/var.css");
+@import url("../../base/var.css");
 .admin-panel{
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.admin-panel__content{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 .admin-panel__table-row-header{
     background: var(--bg-color-header);
     color: var(--text-color);
@@ -29,7 +36,9 @@
     border-radius: var(--border-rad);
     color: var(--text-color-alternative);
 }
+
 .admin-panel__table-row td{
+
     background-color: var(--bg-items);
     padding: 10px;
     font-size: 13px;
@@ -51,4 +60,31 @@
     color: var(--text-color-alternative);
     font-weight: bold;
     padding: 5px 10px;
+}
+.admin-panel__tap-container{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0px;
+}
+.admin-panel__header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0px;
+}
+.admin-panel__tap{
+    padding: 5px 10px;
+    border-radius: var(--border-rad);
+    color: var(--text-color);
+    font-weight: bold;
+    cursor: pointer;
+    background: #303033;
+    transition: opacity 0.3s ease;
+}
+.admin-panel__tap:hover{
+    opacity: 0.8;
 }

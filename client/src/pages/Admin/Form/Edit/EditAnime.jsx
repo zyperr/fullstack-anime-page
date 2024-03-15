@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FormEdit } from "./FormEdit";
 import { useApiAnimes } from "../../../../hooks/useApiAnimes";
-import "../../../../styles/pages/admin/form/edit/editAnime.css";
+import "../../../../styles/pages/admin/form/create/addAnime.css";
 export const EditAnime = () => {
   const { getAnime } = useApiAnimes();
   const params = useParams();
@@ -17,7 +17,7 @@ export const EditAnime = () => {
     synopsis: true,
   };
   useEffect(() => {
-    getAnime("http://127.0.0.1:8000/api/animes/", params.id).then((data) =>
+    getAnime("http://127.0.0.1:8000/api/animes/", params.id).then(({data}) =>
       setAnime(data)
     );
   }, []);
@@ -27,7 +27,6 @@ export const EditAnime = () => {
   }
   return (
     <section className="edit">
-
       <FormEdit anime={anime} disabled={disabled} id={params.id} name={params.name}/>
     </section>
   );

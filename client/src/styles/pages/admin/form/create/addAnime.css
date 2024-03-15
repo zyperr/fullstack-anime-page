@@ -1,0 +1,74 @@
+@import url("../../../../base/var.css");
+.admin__add{
+  background-color: #333;
+  position: relative;
+}
+.admin__form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  gap: 10px;
+  padding: 0 0 20px 0px;
+}
+.form__wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 10px 0px;
+  position: relative;
+}
+.form__p{
+  font-size: 18px;
+  color: rgb(188 199 211);
+  margin: 10px 0px;
+}
+.form__label {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+}
+.form__checkbox-container{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+.checkbox-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  place-content: center;
+  gap: 10px;
+}
+
+.form__checkbox {
+  margin: 0px 5px;
+}
+.admin__add .nav__list-li{
+  color: var(--text-color);
+}
+.select__icon{
+  position: absolute;
+  top: 47px;
+  left: 150px;
+  font-size: 20px;
+  z-index: 1;
+}
+
+.alert.alert-success{
+  background: var(--color-success);
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,70px);
+  width: 100%;
+  z-index: 1;
+  padding: 10px 15px;
+  text-align: center;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

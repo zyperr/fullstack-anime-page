@@ -4,15 +4,18 @@ from config.db import collection_mw as collection
 from schema.schemas import list_serial
 from models.anime import Anime,AnimeUpdate
 from models.pagation import PaginationModel,pagination_params,get_pagination
-
+from math import ceil
 from services.db_utils_mw import delete_mw,update_mw,get_one_mw
 
 manhwasRouter = APIRouter()
 
 @manhwasRouter.get("/api/manhwas",tags=["manhwas"])
 async def get_manhwas(pagination:Annotated[PaginationModel,Depends(pagination_params)]):
-    manhwas = list_serial(collection.find({}).limit(pagination.perPage).skip((pagination.page-1)*pagination.perPage))
-    return get_pagination(pagination.page,pagination.perPage,pagination.next,pagination.prev,manhwas,"api/manhwas")
+    skip =(pagination.page -1)* pagination.perPage
+    limit = pagination.perPage
+    count = ceil(collection.count_documents({}) / pagination.perPage)
+    manhwas= list_serial(collection.find({}).skip(skip).limit(limit))
+    return get_pagination(pagination.page,pagination.perPage,pagination.next,pagination.prev,manhwas,"api/manhwas",count)
 
 
 @manhwasRouter.post("/api/manhwas",tags=["manhwas"],response_model=Anime)

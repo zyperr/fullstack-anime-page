@@ -13,7 +13,20 @@
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    position: relative;
+    border-radius: var(--border-card);
+    overflow: hidden;
 }
+.displayAnimes-section__container::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+
 
 .figure-container{
     position: relative;
@@ -30,13 +43,14 @@
     object-fit: cover;
     height: 180px;
     border-radius: .3rem;
+    position: relative;
 }
+
 .displayAnimes__anime-title{
     position: absolute;
     bottom: 0;
     left: 0;
 
-    background-color: rgba(0, 0, 0, 0.712);
     border-radius: 0 0 .3rem .3rem;
     color: var(--alternatives-text-color);
     padding: .3rem;
@@ -48,9 +62,36 @@
     white-space: nowrap;
 
     text-transform: capitalize;
+    z-index: 1;
 }
 
-
+.displayAnimes__span{
+    position: absolute;
+    left: 3px;
+    top: 5px;
+    padding: 0px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+.displayAnimes__span.TV{
+    background: var(--tv-color);
+}
+.displayAnimes__span.OVA{
+    background: var(--ova-color);
+}
+.displayAnimes__span.MANGA{
+    background: var(--mangas-color);
+}
+.displayAnimes__span.MOVIE{
+    background: var(--movie-color);
+}
 @media screen and (min-width: 768px){
 
 

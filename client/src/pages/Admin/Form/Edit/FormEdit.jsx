@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import { useApiAnimes } from "../../../../hooks/useApiAnimes";
+import "../../../../styles/pages/admin/form/edit/editAnime.css";
 import { useState } from "react";
 export const FormEdit = ({ anime, disabled, id, name }) => {
   const { putAnime } = useApiAnimes();

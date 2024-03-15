@@ -2,6 +2,7 @@
 
 .anime__section{
     color: var(--text-color-alternative);
+    position: relative;
 }
 /*Moris you to test this animation please,changed as more as u need mai broda*/
 .anime__back_btn{
@@ -86,4 +87,20 @@
     font-size: 1rem;
     padding: 0 0 0 .5rem;
     text-wrap: pretty;
+}
+.anime__title.not-auth{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column wrap;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+    z-index: 1;
+    padding: 10px 15px;
+    color: var(--text-color);
+    background: #333;
+    border-radius: var(--border-rad);
 }

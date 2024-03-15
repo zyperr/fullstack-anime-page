@@ -6,11 +6,17 @@ import { CiBookmark, CiLogout } from "react-icons/ci";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-import { useState } from "react";
+import { useState,useRef } from "react";
 
 function HeaderAuth({ data }) {
   const [open, setOpen] = useState(false);
+  const menu = useRef(null);
   function handleClick() {
+    window.addEventListener("click", (e) => {
+      if (e.target === menu.current) {
+        setOpen(false);
+      }
+    });
     setOpen(!open);
   }
   function logout() {
@@ -30,7 +36,7 @@ function HeaderAuth({ data }) {
           </li>
         </ul>
         <ul className="header__ul headerAuth__ul">
-          <div className={open ? "bg-blur" : "bg-blur hideMenu"}></div>
+          <div ref={menu} className={open ? "bg-blur" : "bg-blur hideMenu"}></div>
           <li className="header__li header__li--hover" onClick={handleClick}>
             <img src={data.avatar} className="headerAuth__avatar" />
             <IoMdArrowDropdown className="header__li-icons"/>

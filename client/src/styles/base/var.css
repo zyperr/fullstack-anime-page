@@ -11,6 +11,7 @@
     --color-success:#3b9c35;
     --hover-color:#AFA2FF;
     --border-rad: 5px;
+    --border-card-rad:13px;
     --boorder-rad-card:.3rem;
     --padd-input: 10px;
     --anchora-color:#AFA2FF;
@@ -19,5 +20,13 @@
     --btn-padding-mobile:7px 20px;
     --btn-color-bg:#642CA9;
     --btn-color-text:#EAFDF8;
+
+    --tv-color:#01bcf3;
+    --mangas-color:#5ae195;
+    --movie-color:#fd3246;
+    --ova-color:#ff7e00;
+
+  --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+
 }
 

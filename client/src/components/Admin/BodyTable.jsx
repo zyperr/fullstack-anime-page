@@ -1,14 +1,5 @@
-import { useApiAnimes } from "../../hooks/useApiAnimes";
-import { useEffect, useState } from "react";
 import { Dropdown } from "./Dropdown";
-export const BodyTable = () => {
-  const { getAnimes } = useApiAnimes();
-  const [animes, setAnimes] = useState([]);
-  useEffect(() => {
-    getAnimes("http://127.0.0.1:8000/api/animes").then(({ animes }) => {
-      setAnimes(animes);
-    });
-  }, []);
+export const BodyTable = ({ animes }) => {
   return (
     <>
       <tbody className="admin-panel__table-body">
@@ -33,7 +24,7 @@ export const BodyTable = () => {
                 {anime.synopsis}
               </td>
               <td>
-                <Dropdown id={anime._id}/>
+                <Dropdown id={anime._id} />
               </td>
             </tr>
           );

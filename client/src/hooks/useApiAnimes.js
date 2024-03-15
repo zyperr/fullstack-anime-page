@@ -1,9 +1,9 @@
 /* eslint-disable no-useless-catch */
-
 // Todo: Agregar las demas peticiones http para los animes/mangas/manhwas de la api
 function useApiAnimes() {
-  const getAnimes = async (url) => {
+  const getAnimes = async (URL,page) => {
     try {
+      let url = page === null ? URL : `${URL}?page=${page}`
       const response = await fetch(url);
       const data = await response.json();
       if (!response.ok) {
@@ -34,10 +34,7 @@ function useApiAnimes() {
     try {
       const response = await fetch(url+id);
       const data = await response.json();
-      if (!response.ok) {
-        throw Error(data.message);
-      }
-      return data;
+      return {data:data,res:response.status};
     }catch(error){
         throw error
     }
@@ -58,6 +55,22 @@ function useApiAnimes() {
         console.log(error)
     }
   }
+  const addAnime = async (url,data) => {
+    try {
+      const response = await fetch(url,{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+          'accept': 'application/json',
+        },
+        body:JSON.stringify(data)
+      })
+      const info = await response.json();
+      return {info,res:info.status}
+    }catch(error){
+      console.log(error)
+    }
+  }
   const getSlider = async () => {
     try {
       const response = await fetch("http://127.0.0.1:8000/api/slider");
@@ -67,7 +80,7 @@ function useApiAnimes() {
         console.log(error)
     }
   }
-  return { getAnimes, getAnime,addToFavorites,getSlider,putAnime };
+  return { getAnimes, getAnime,addToFavorites,getSlider,putAnime,addAnime };
 }
 
 export { useApiAnimes };

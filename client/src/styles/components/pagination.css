@@ -1,0 +1,18 @@
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0px;
+}
+.pagination__li .pagination__link{
+    background: #303033;
+    padding: 5px 10px;
+    border-radius: 5px ;
+    cursor: pointer;
+    color: #AFA2FF;
+}
+.pagination__li .pagination__link:hover{
+    background: #252527;
+    color: #7d4eb7;
+}

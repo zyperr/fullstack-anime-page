@@ -13,18 +13,20 @@ def pagination_params(
 ):
     return PaginationModel(perPage=perPage,page=page,next=page+1,prev= page-1)
 
-def get_pagination(page:int,perPage:int,next:int,prev:int,elements:list,endpoint:str):
+def get_pagination(page:int,perPage:int,next:int,prev:int,elements:list,endpoint:str,count:int):
     pages = {
-        "page":page,
+        "pages":count,
         "perPage":perPage,
+        "CurrentPage":page,
         "prev":f"http://127.0.0.1:8000/{endpoint}?page={prev}", 
         "next":f"http://127.0.0.1:8000/{endpoint}?page={next}",
-        "ElementsPerPage":len(elements)
+        "ElementsPerPage":len(elements),
     }
     if pages["prev"].split("?pages=")[0][-1] == "0":
         pages["prev"] = None
     if len(elements) == 0:
         pages["next"] = None
         elements ="No more result to show"
+    
     
     return {"pages":pages,"result":elements}
