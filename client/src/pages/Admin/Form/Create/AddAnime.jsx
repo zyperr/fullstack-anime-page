@@ -68,10 +68,10 @@ const AddAnime = () => {
   })
   return (
     <section className="admin__add">
-      <HeaderSection fnState={setTap}/>
+      <HeaderSection fnState={setTap} initialTap={tap}/>
       <form className="admin__form" onSubmit={onSubmit}>
         <div className="form__wrapper">
-          <p className="form__p">You&apos;re adding {tap}</p>
+          <p className="form__p">You&apos;re adding <span className={`form__span ${tap}`}>{tap}</span></p>
         </div>
         <div className="form__wrapper">
           <label htmlFor="title">title</label>

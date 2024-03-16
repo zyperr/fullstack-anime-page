@@ -49,6 +49,7 @@ input {
   border: none;
   padding: var(--padd-input);
   color: #333;
+  font-weight: 500;
 }
 input:focus-visible {
   outline: 3px solid var(--bg-items);

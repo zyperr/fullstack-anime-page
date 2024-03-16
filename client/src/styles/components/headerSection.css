@@ -22,8 +22,20 @@
     padding: 1rem .5rem;
     position: relative;
     cursor: pointer;
+    color: var(--text-color-alternative);
 }
-
+.nav__list-li:hover{
+    color: var(--details);
+}
+.nav__list-li.active.animes::after{
+    border-bottom:2px solid var(--tv-color);
+}
+.nav__list-li.active.mangas::after{
+    border-bottom:2px solid var(--mangas-color);
+}
+.nav__list-li.active.manhwas::after{
+    border-bottom: 2px solid var(--manhwas-color);
+}
 .nav__list-li::after{
     content: '';
     position: absolute;

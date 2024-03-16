@@ -1,3 +1,8 @@
 .home{
     padding: 4.35rem 0 0 0;
+    height: 100%;
+}
+.home__container{
+    height: calc(100vh - 4.35rem);
+    padding: unset;
 }

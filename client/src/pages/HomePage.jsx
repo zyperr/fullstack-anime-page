@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import Pagination from "../components/Pagination.jsx";
 import { Context } from "../context/Provider.jsx";
-import { NoResult } from "../components/Admin/NoResult.jsx";
+import { NoResult } from "../components/NoResult.jsx";
 export function HomePage() {
   UseDocumentTitle("Home | look for animes,mangas and manhwas");
   const { tap, setTap } = useContext(Context);
@@ -29,8 +29,8 @@ export function HomePage() {
     <section className="home">
       <Gallery />
 
-      <section>
-        <HeaderSection fnState={setTap} />
+      <section className="home__container">
+        <HeaderSection fnState={setTap} initialTap={tap} />
         <div className="wrapper-grid">
           {dataAnimes instanceof Array && dataAnimes.length > 0 ? (
             dataAnimes.map((item) => {

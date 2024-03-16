@@ -17,6 +17,7 @@ function Profile({ data }) {
     banner: true,
     avatar: true,
   });
+  const body = document.querySelector("body");
 
   //Usestate para las apicalls
   const [banners, setBanners] = useState([]);
@@ -53,9 +54,11 @@ function Profile({ data }) {
     }
   };
   const handleModalBanner = () => {
+    body.style.overflow = "hidden";
     setBannerModal({ ...bannerModal, banner: !bannerModal.banner });
   };
   const handleAvatarModal = () => {
+    body.style.overflow = "hidden";
     setBannerModal({ ...bannerModal, avatar: !bannerModal.avatar });
   };
   const handleSelect = (index, e) => {

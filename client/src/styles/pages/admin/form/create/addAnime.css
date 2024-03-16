@@ -55,8 +55,23 @@
   left: 150px;
   font-size: 20px;
   z-index: 1;
-}
 
+}
+.form__span{
+  font-size: 17px;
+  font-weight: bold;
+  padding: 5px 8px;
+  border-radius: var(--border-rad);
+}
+.form__span.animes{
+  background: linear-gradient(180deg, var(--tv-color), var(--tv-color-2));
+}
+.form__span.mangas{
+  background: linear-gradient(180deg, var(--mangas-color), var(--mangas-color-2));
+}
+.form__span.manhwas{
+  background: linear-gradient(180deg, var(--manhwas-color), var(--manhwas-color-2));
+}
 .alert.alert-success{
   background: var(--color-success);
   position: fixed;

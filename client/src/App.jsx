@@ -14,6 +14,7 @@ import { AdminPanel } from "./pages/Admin/AdminPanel.jsx";
 import { EditAnime } from "./pages/Admin/Form/Edit/EditAnime";
 import { AddAnime } from "./pages/Admin/Form/Create/AddAnime.jsx";
 import { Provider } from "./context/Provider";
+import { NotFound } from "./pages/error/NotFound.jsx";
 
 function App() {
   const { getAuthUser } = useApiUser();
@@ -63,7 +64,7 @@ function App() {
           {data.role === "admin" && <Route path="/admin/panel" element=<AdminPanel /> />}
           {data.role === "admin" && <Route path="/admin/animes/:id/:name" element=<EditAnime /> />}
           {data.role === "admin" && <Route path="/admin/animes/add" element=<AddAnime /> />}
-          <Route path="*" element="error" />
+          <Route path="*" element=<NotFound/> />
         </Routes>
       </Provider>
     </BrowserRouter>

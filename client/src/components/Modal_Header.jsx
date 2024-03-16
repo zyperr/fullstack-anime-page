@@ -10,6 +10,7 @@ function Modal_Header({
   handleSaved,
   alt,
 }) {
+  const body = document.querySelector("body");
   return (
     <div className="profile__wrapper">
       <div className="profile__banner">
@@ -35,6 +36,7 @@ function Modal_Header({
             text="Cancel"
             fn={() => {
               handleModal();
+              body.style.overflow = "auto";
               setImgData({
                 img_profile: src,
                 state: false,

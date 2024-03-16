@@ -81,16 +81,16 @@
     z-index: 1;
 }
 .displayAnimes__span.TV{
-    background: var(--tv-color);
+    background: linear-gradient(180deg,var(--tv-color), var(--tv-color-2));
 }
 .displayAnimes__span.OVA{
     background: var(--ova-color);
 }
 .displayAnimes__span.MANGA{
-    background: var(--mangas-color);
+    background: linear-gradient(180deg,var(--mangas-color), var(--mangas-color-2));
 }
 .displayAnimes__span.MOVIE{
-    background: var(--movie-color);
+    background:var(--movie-color);
 }
 @media screen and (min-width: 768px){
 

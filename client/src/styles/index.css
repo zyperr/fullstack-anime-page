@@ -26,10 +26,10 @@
     grid-template-columns: repeat(4,max-content);
     place-content: center;
     gap: 1.8rem;
-    height: 100%;
-    width: 100%;
 }
-
+.wrapper-grid .noResult{
+    grid-area: 1 / 1 / 2 / 4;
+}
 section{
     padding: 5rem 0 0 0;
 }

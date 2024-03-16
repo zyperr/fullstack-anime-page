@@ -6,7 +6,7 @@ import { Context } from "../../context/Provider";
 import "../../styles/pages/admin/adminPanel.css";
 import Pagination from "../../components/Pagination";
 import { MdAdd, MdDelete } from "react-icons/md";
-import { NoResult } from "../../components/Admin/NoResult";
+import { NoResult } from "../../components/NoResult";
 import { HeaderSection } from "../../components/HeaderSection";
 import { Link } from "react-router-dom";
 export const AdminPanel = () => {
@@ -33,10 +33,7 @@ export const AdminPanel = () => {
               <MdAdd />
            </Link>
           </button>
-          <HeaderSection fnState={setTap} />
-          <button className="btn">
-            <MdDelete />
-          </button>
+          <HeaderSection fnState={setTap} initialTap={tap}/>
         </aside>
         {animes instanceof Array ? (
           <>
