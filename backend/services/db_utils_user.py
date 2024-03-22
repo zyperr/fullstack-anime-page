@@ -119,7 +119,10 @@ def update_avatar_profile(id:str,avatar) -> bool:
 def add_favorite(id:str,item_id:str):
     user = collection.find_one({"_id":ObjectId(id)})
     item = collection_anime.find_one({"_id":ObjectId(item_id)})
-    if user:
+    print(user["favorites"])
+    if item in user["favorites"]:
+        raise HTTPException(status_code=409, detail="Item already in Favorites")
+    elif user:
         collection.update_one({
             "_id":ObjectId(id)
         },
@@ -128,9 +131,7 @@ def add_favorite(id:str,item_id:str):
                 "favorites":item
             }
         })
-        return {"message":"it has been added to Favorites"}
-    else:
-        raise HTTPException(status_code=404, detail="User not found")
+        return HTTPException(status_code=200, detail="Item added to Favorites")
 
 def delete_user(id:str):
     if not collection.find_one({"_id":ObjectId(id)}):

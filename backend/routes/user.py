@@ -80,6 +80,8 @@ def favorites(item_id:str,current_user:User = Depends(get_current_user)):
     response =  add_favorite(user_id,item_id)
     if response:
         return response
+    elif not current_user:
+        raise HTTPException(status_code=401,detail="You need to have an account first")
     raise HTTPException(status_code=400,detail="Error adding to Favorites")
 
 @userRouter.put("/api/users/changed-password/me",tags=["users changed password"])

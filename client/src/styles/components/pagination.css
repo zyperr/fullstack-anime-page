@@ -4,6 +4,7 @@
     align-items: center;
     gap: 10px;
     margin: 10px 0px;
+    padding: 15px 0px;
 }
 .pagination__li .pagination__link{
     background: #303033;

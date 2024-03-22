@@ -62,7 +62,7 @@ function Register() {
             <input
               className="input"
               id="username"
-              placeholder="Zyperr"
+              placeholder="Cream_Soda"
               {...register("username", {
                 required: {
                   value: true,

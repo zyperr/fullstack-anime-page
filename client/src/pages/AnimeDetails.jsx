@@ -1,18 +1,30 @@
 import { useParams } from "react-router-dom";
 import { useApiAnimes } from "../hooks/useApiAnimes";
-import { useEffect, useState } from "react";
+import {useEffect, useState,useContext } from "react";
 import { Paragraph } from "../components/Paragraph";
-import { FaHeart } from "react-icons/fa";
-import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { FaArrowAltCircleLeft,FaHeart,FaHeartBroken } from "react-icons/fa";
 import "../styles/pages/animeDetails.css";
 import { Link } from "react-router-dom";
+import {UserContext} from "../context/UserProvider";
 function AnimeDetails() {
+  const  {fav}  = useContext(UserContext);
   const params = useParams();
-  const [data, setData] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  
   const { getAnime, addToFavorites } = useApiAnimes();
+  const [data, setData] = useState({});
   const [showBackBar, setShowBackBar] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
-
+  const [displayMessage, setDisplayMessage] = useState({
+    state: false,
+    message: "",
+    addClass: "",
+  });
+  useEffect(() => {
+    const item = fav.map((item) => item._id); 
+    setFavorites(item);
+  }, [fav]);
+  
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -25,35 +37,53 @@ function AnimeDetails() {
 
   useEffect(() => {
     getAnime(`http://127.0.0.1:8000/api/${params.type}/`, params.id).then(
-      ({ data }) => setData(data)
+      ({ data }) => {
+        setData(data);
+        setGenres(data.genres);
+      }
     );
   }, []);
-  const handleFavorite = async () => {
-    if (!localStorage.getItem("token")) {
-      setIsAuth(true);
-      setTimeout(() => {
-        setIsAuth(false);
-      }, 4000);
 
-    }
+  const handleFavorite = async () => {
     const { data, res } = await addToFavorites(
       "http://127.0.0.1:8000/api/users/favorites/me",
-      localStorage.getItem("token").toString(),
+      localStorage.getItem("token")?.toString(),
       params.id
     );
-    if (res === 200) {
-      setIsAuth(false);
-      console.log(data.message);
-    } else if (res === 401) {
-      console.log(data.message);
+    if (res === 401) {
+      setDisplayMessage({
+        state: true,
+        message: data.detail,
+        addClass: "error",
+      });
+      setTimeout(() => {
+        setDisplayMessage({ state: false, message: "", addClass: "" });
+      }, 4000);
+    } else if (res === 200) {
+      setDisplayMessage({
+        state: true,
+        message: data.detail,
+        addClass: "success",
+      });
+      setTimeout(() => {
+        setDisplayMessage({ state: false, message: "", addClass: "" });
+      }, 4000);
+    } else if (res === 409) {
+      setDisplayMessage({
+        state: true,
+        message: data.detail,
+        addClass: "warning",
+      });
+      setTimeout(() => {
+        setDisplayMessage({ state: false, message: "", addClass: "" });
+      }, 4000);
     }
   };
   return (
     <section className="anime__section" style={{ color: "#00000" }}>
-      {isAuth ? (
-        <div className="anime__title not-auth">
-          <p>It&apos;s seems that you don&apos;t have an account</p>
-          <p>Go and create one <Link to="/user/register">Register</Link></p>
+      {displayMessage.state ? (
+        <div className={`snack-bar ${displayMessage.addClass}`}>
+          <p>{displayMessage.message}</p>
         </div>
       ) : null}
       {/* Este es el componente afectado por el efecto de scroll*/}
@@ -70,16 +100,35 @@ function AnimeDetails() {
       ></div>
       <div className="anime__details">
         <h2 className="anime__details-title">{data.title}</h2>
+        
         <Paragraph>
-          <FaHeart
-            fontSize={20}
-            className="anime__details-fav"
-            onClick={handleFavorite}
-          />
+          {
+            favorites.includes(params.id) ? (
+              <FaHeartBroken
+                fontSize={20}
+                className="anime__details-fav"
+                onClick={handleFavorite}
+                cursor={"pointer"}
+              />
+            ) : ( 
+              <FaHeart
+                fontSize={20}
+                className="anime__details-fav"
+                onClick={handleFavorite}
+                cursor={"pointer"}
+              />
+            )
+          }
         </Paragraph>
         <Paragraph text={data.status} className={"anime__details-status"} />
       </div>
-      <article className="anime__genres">{/*** proximo a completar */}</article>
+      <article className="anime__genres">
+        {genres.map((genre) => (
+          <span key={genre} className="anime__genre">
+            {genre}
+          </span>
+        ))}
+      </article>
       <article className="anime__synopsis">
         <h4>Synopsis</h4>
         <Paragraph

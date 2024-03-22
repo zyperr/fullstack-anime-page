@@ -1,6 +1,7 @@
 @import url("../base/var.css");
 .login{
  background: var(--bg-color-header);
+ height: 100vh;
 }
 .container{
     display: flex;
@@ -8,6 +9,7 @@
     align-items: center;
     flex-direction: column;
     gap: 10px;
+    height: 100%;
 }
 .login__header-errors{
     color: var(--text-color-alternative);
@@ -109,5 +111,8 @@
     }
     .login__form .input{
         width: auto;
+    }
+    .login__banner {
+        height: 500px;
     }
 }
