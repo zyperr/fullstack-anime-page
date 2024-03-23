@@ -15,45 +15,45 @@ import { Provider } from "./context/Provider";
 import { UserContext } from "./context/UserProvider.jsx";
 import { NotFound } from "./pages/error/NotFound.jsx";
 import { useEffect,useContext } from "react";
-
+import {FavoritePage } from "./pages/FavoritePage.jsx"
 
 function App() {
-  const { data } = useContext(UserContext);
-  const userInfo = data;
+  const { user,fav } = useContext(UserContext);
   const isAuth = () => {
-    return data.role !== undefined;
+    return user.role !== undefined;
   };
 
   useEffect(() => {
     if (isAuth() === undefined) {
-      window.location.href = data.role === undefined ? "/user/login" : "/";
+      window.location.href = user.role === undefined ? "/user/login" : "/";
     }
   }, []);
   return (
     <BrowserRouter>
-      {isAuth() ? <HeaderAuth data={userInfo} /> : <Header />}
+      {isAuth() ? <HeaderAuth data={user} /> : <Header />}
       <Provider>
         <Routes>
           <Route path="/" element=<HomePage /> />
           <Route path="/user/login" element=<Login /> />
           <Route path="user/register" element=<Register /> />
           <Route path="/:type/:title/:id" element=<AnimeDetails /> />
-          {data.role === "user" ||
-            (data.role === "admin" && (
+          {user.role === "user" ||
+            (user.role === "admin" && (
               <Route
                 path="/user/profile/:username/:id"
-                element=<Profile data={userInfo} />
+                element=<Profile data={user} />
               />
             ))}
-          {data.role === "admin" && (
+          {user.role === "admin" && (
             <Route path="/admin/panel" element=<AdminPanel /> />
           )}
-          {data.role === "admin" && (
+          {user.role === "admin" && (
             <Route path="/admin/animes/:id/:name" element=<EditAnime /> />
           )}
-          {data.role === "admin" && (
+          {user.role === "admin" && (
             <Route path="/admin/animes/add" element=<AddAnime /> />
           )}
+          <Route path="/user/favorites" element=<FavoritePage data={fav}/> />
           <Route path="*" element=<NotFound /> />
         </Routes>
       </Provider>

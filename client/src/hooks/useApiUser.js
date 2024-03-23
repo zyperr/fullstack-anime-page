@@ -45,7 +45,7 @@ function useApiUser() {
         },
       })
       const authUserData = await response.json();
-      return {authUserData,status:response.status}
+      return {user:authUserData,status:response.status}
     }catch(error){
       console.log(error)
     }

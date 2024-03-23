@@ -59,7 +59,7 @@ function HeaderAuth({ data }) {
             </li>
 
             <li className="header__navlink headerAuth__navlink">
-              <NavLink className="headerAuth__navlink" to={""}>
+              <NavLink className="headerAuth__navlink" to={`/user/favorites`}>
                 <CiBookmark className="header__li-icons" />
                 <span>Favorite</span>
               </NavLink>

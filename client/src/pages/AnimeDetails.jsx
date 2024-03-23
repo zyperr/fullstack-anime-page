@@ -42,7 +42,7 @@ function AnimeDetails() {
         setGenres(data.genres);
       }
     );
-  }, []);
+  }, [genres]);
 
   const handleFavorite = async () => {
     const { data, res } = await addToFavorites(
@@ -123,7 +123,7 @@ function AnimeDetails() {
         <Paragraph text={data.status} className={"anime__details-status"} />
       </div>
       <article className="anime__genres">
-        {genres.map((genre) => (
+        {genres?.map((genre) => (
           <span key={genre} className="anime__genre">
             {genre}
           </span>
