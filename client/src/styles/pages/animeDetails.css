@@ -45,6 +45,10 @@
   font-size: 1.5rem;
   font-weight: 600;
   text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
 }
 .anime__details-title-span{
     color: var(--details);

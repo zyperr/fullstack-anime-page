@@ -16,7 +16,7 @@ export function FavoritePage({ data }) {
                     data.map((anime) => {
 
                         return (
-                            <Link key={anime._id} to={`/${anime.media_type === "TV" ? "animes" : `${anime.media_type}s` }/${anime.title}/${anime._id}`}>
+                            <Link key={anime._id} to={`/${anime.media_type === "TV" || anime.media_type === "OVA" || anime.media_type === "Movie" ? "animes" : `${anime.media_type}s` }/${anime.title}/${anime._id}`}>
                                 <DisplayAnimes key={anime._id} title={anime.title} img={anime.img_url} type={anime.media_type} />
                             </Link>
                         )

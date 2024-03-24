@@ -80,7 +80,6 @@ function AnimeDetails() {
     }
     setFavorites((prevState) => [...prevState, params.id]);
     setFav((prevState) => [...prevState, dataAnime]);
-
   };
   const handleDelete = async () => {
     const { data, res } = await deleteFromFavorites(
@@ -128,30 +127,35 @@ function AnimeDetails() {
         style={{ backgroundImage: `url(${dataAnime.img_url})` }}
       ></div>
       <div className="anime__details">
-        <h2 className="anime__details-title">{dataAnime.title}</h2>
+        <h2 className="anime__details-title">
+          {dataAnime.title}
+          <Paragraph>
+            {favorites?.includes(params.id) ? (
+              <FaHeartBroken
+                fontSize={20}
+                className="anime__details-fav"
+                onClick={handleDelete}
+                cursor={"pointer"}
+              />
+            ) : (
+              <FaHeart
+                fontSize={20}
+                className="anime__details-fav"
+                onClick={handleFavorite}
+                cursor={"pointer"}
+              />
+            )}
+          </Paragraph>
+        </h2>
 
-        <Paragraph>
-          {favorites?.includes(params.id) ? (
-            <FaHeartBroken
-              fontSize={20}
-              className="anime__details-fav"
-              onClick={handleDelete}
-              cursor={"pointer"}
-            />
-          ) : (
-            <FaHeart
-              fontSize={20}
-              className="anime__details-fav"
-              onClick={handleFavorite}
-              cursor={"pointer"}
-            />
-          )}
-        </Paragraph>
-        <Paragraph text={dataAnime.status} className={"anime__details-status"} />
+        <Paragraph
+          text={dataAnime.status}
+          className={"anime__details-status"}
+        />
       </div>
-        <span className="anime__details-title-span">
-          episodes: {dataAnime.num_episodes}
-        </span>
+      <span className="anime__details-title-span">
+        episodes: {dataAnime.num_episodes}
+      </span>
       <article className="anime__genres">
         {genres?.map((genre) => (
           <span key={genre} className="anime__genre">
