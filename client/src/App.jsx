@@ -28,6 +28,7 @@ function App() {
       window.location.href = user.role === undefined ? "/user/login" : "/";
     }
   }, []);
+  console.log(fav)
   return (
     <BrowserRouter>
       {isAuth() ? <HeaderAuth data={user} /> : <Header />}

@@ -22,7 +22,7 @@ function UserProvider({children}) {
       getAuth();
     }, []);
   return (
-    <UserContext.Provider value={{user,fav}}>
+    <UserContext.Provider value={{user,fav,setFav}}>
         {children}
     </UserContext.Provider>
   )

@@ -39,10 +39,26 @@ function useApiAnimes() {
         throw error
     }
   }
-  const addToFavorites = async (url,token,itemId) => {
+  const addToFavorites = async (token,itemId,type) => {
     try {
-      const response = await fetch(`${url}?item_id=${itemId}`,{
+      const response = await fetch(`http://127.0.0.1:8000/api/users/favorites/me?item_id=${itemId}&collection_name=${type}`,{
         method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+          'accept': 'application/json',
+          'Authorization':`Bearer ${token}`
+        },
+      })
+      const data = await response.json();
+      return {data,res:response.status}
+    }catch(error){
+        console.log(error)
+    }
+  }
+  const deleteFromFavorites = async (token,itemId) => {
+    try{
+      const response = await fetch(`http://127.0.0.1:8000/api/users/favorites/me?item_id=${itemId}`,{
+        method: 'DELETE',
         headers:{
           'Content-Type': 'application/json',
           'accept': 'application/json',
@@ -80,7 +96,7 @@ function useApiAnimes() {
         console.log(error)
     }
   }
-  return { getAnimes, getAnime,addToFavorites,getSlider,putAnime,addAnime };
+  return { getAnimes, getAnime,addToFavorites,getSlider,putAnime,addAnime,deleteFromFavorites };
 }
 
 export { useApiAnimes };

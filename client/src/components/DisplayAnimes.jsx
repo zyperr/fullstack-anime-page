@@ -4,7 +4,7 @@ import "../styles/components/displayAnimes.css"
 
 
 export function DisplayAnimes({ img, title,type }) {
-    type = type.toUpperCase()
+    type = type?.toUpperCase()
     return (
         <div className="displayAnimes-section__container">
             <figure className="figure-container">

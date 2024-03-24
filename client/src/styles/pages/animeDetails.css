@@ -46,7 +46,13 @@
   font-weight: 600;
   text-transform: capitalize;
 }
-
+.anime__details-title-span{
+    color: var(--details);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0 0.8rem 0.5rem;
+    text-transform: capitalize;
+}
 .anime__details-fav {
   display: flex;
   align-self: center;
