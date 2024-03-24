@@ -14,15 +14,16 @@ export function FavoritePage({ data }) {
 
                 {
                     data.length === 0 ? <h2 className="noResult">Your favorite is empty.  You should add one or more</h2> :
-                    data.map((anime) => {
-
-                        return (
-                            <Link key={anime._id} to={`/${anime.media_type === "TV" ? "animes" : anime.media_type}/${anime.title}/${anime._id}`}>
-                                <DisplayAnimes key={anime._id} title={anime.title} img={anime.img_url} type={anime.media_type} />
-                            </Link>
-                        )
-                    })
+                        data.map((anime) => {
+                            return (
+                                <Link key={anime._id} to={`/${anime.media_type === "TV" ? "animes" : anime.media_type}/${anime.title}/${anime._id}`}>
+                                    <DisplayAnimes key={anime._id} title={anime.title} img={anime.img_url} type={anime.media_type} isFavorite={true}/>
+                                </Link>
+                                 
+                            )
+                        })
                 }
+
             </div>
 
         </section>
