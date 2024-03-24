@@ -7,7 +7,6 @@ import { DisplayAnimes } from "../components/DisplayAnimes"
 
 
 export function FavoritePage({ data }) {
-
     return (
         <section className="home_container">
             <div className="wrapper-grid">
@@ -17,7 +16,7 @@ export function FavoritePage({ data }) {
                     data.map((anime) => {
 
                         return (
-                            <Link key={anime._id} to={`/${anime.media_type === "TV" ? "animes" : anime.media_type}/${anime.title}/${anime._id}`}>
+                            <Link key={anime._id} to={`/${anime.media_type === "TV" ? "animes" : `${anime.media_type}s` }/${anime.title}/${anime._id}`}>
                                 <DisplayAnimes key={anime._id} title={anime.title} img={anime.img_url} type={anime.media_type} />
                             </Link>
                         )

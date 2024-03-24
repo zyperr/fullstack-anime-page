@@ -13,7 +13,7 @@ function AnimeDetails() {
   const [favorites, setFavorites] = useState([]);
 
   const { getAnime, addToFavorites, deleteFromFavorites } = useApiAnimes();
-  const [data, setData] = useState({});
+  const [dataAnime, setDataAnime] = useState({});
   const [showBackBar, setShowBackBar] = useState(false);
   const [displayMessage, setDisplayMessage] = useState({
     state: false,
@@ -38,7 +38,7 @@ function AnimeDetails() {
   useEffect(() => {
     getAnime(`http://127.0.0.1:8000/api/${params.type}/`, params.id).then(
       ({ data }) => {
-        setData(data);
+        setDataAnime(data);
         setGenres(data.genres);
       }
     );
@@ -60,8 +60,6 @@ function AnimeDetails() {
         setDisplayMessage({ state: false, message: "", addClass: "" });
       }, 4000);
     } else if (res === 200) {
-      setFavorites((prevState) => [...prevState, params.id]);
-      setFav((prevState) => [...prevState, data]);
       setDisplayMessage({
         state: true,
         message: data.detail,
@@ -80,6 +78,9 @@ function AnimeDetails() {
         setDisplayMessage({ state: false, message: "", addClass: "" });
       }, 4000);
     }
+    setFavorites((prevState) => [...prevState, params.id]);
+    setFav((prevState) => [...prevState, dataAnime]);
+
   };
   const handleDelete = async () => {
     const { data, res } = await deleteFromFavorites(
@@ -124,10 +125,10 @@ function AnimeDetails() {
 
       <div
         className="anime__banner"
-        style={{ backgroundImage: `url(${data.img_url})` }}
+        style={{ backgroundImage: `url(${dataAnime.img_url})` }}
       ></div>
       <div className="anime__details">
-        <h2 className="anime__details-title">{data.title}</h2>
+        <h2 className="anime__details-title">{dataAnime.title}</h2>
 
         <Paragraph>
           {favorites?.includes(params.id) ? (
@@ -146,10 +147,10 @@ function AnimeDetails() {
             />
           )}
         </Paragraph>
-        <Paragraph text={data.status} className={"anime__details-status"} />
+        <Paragraph text={dataAnime.status} className={"anime__details-status"} />
       </div>
         <span className="anime__details-title-span">
-          episodes: {data.num_episodes}
+          episodes: {dataAnime.num_episodes}
         </span>
       <article className="anime__genres">
         {genres?.map((genre) => (
@@ -162,7 +163,7 @@ function AnimeDetails() {
         <h4>Synopsis</h4>
         <Paragraph
           className={"anime__synopsis-paragraph"}
-          text={data.synopsis}
+          text={dataAnime.synopsis}
         />
       </article>
     </section>
