@@ -9,15 +9,16 @@ from datetime import datetime,timedelta
 from passlib.context import CryptContext
 from middlewares.regex import verify_pattern_user_data
 import random
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 server_url = "http://127.0.0.1:8000"
 default_avatars = ["/static/avatars/default-avatar-1.webp","/static/avatars/default-avatar-2.webp","/static/avatars/default-avatar-3.webp","/static/avatars/default-avatar-4.webp","/static/avatars/default-avatar-5.webp","/static/avatars/default-avatar-6.webp"]
 default_banners = ["/static/banners/default-banner-1.webp","/static/banners/default-banner-2.webp","/static/banners/default-banner-3.webp","static/banners/default-banner-4.webp"]
 
-SECRET_KEY = "83daa0256a2289b0fb23693bf1f6034d443966"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRES_MINUTES = 30
 
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
 
 pwd_contenxt = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

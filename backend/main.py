@@ -22,6 +22,7 @@ app.include_router(mangasRouter)
 app.include_router(userRouter)
 app.include_router(staticRouter)
 
+
 origins = [
     frontend_url_local,
     frontend,

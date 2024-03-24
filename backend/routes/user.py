@@ -4,14 +4,16 @@ from config.db import collection_user as collection
 from models.pagation import PaginationModel, get_pagination, pagination_params
 from schema.schemas import list_serial_users,serial_users,serial_user_with_hash
 from models.user import UpdatePassword, User,CollectionEnum
-from services.db_utils_user import add_favorite, delete_user, update_avatar_profile, update_password,get_one_user,save_user,get_username,create_access_token,verify_user,ACCESS_TOKEN_EXPIRES_MINUTES,get_current_user,update_banner_profile,delete_favorite
+from services.db_utils_user import add_favorite, delete_user, update_avatar_profile, update_password,get_one_user,save_user,get_username,create_access_token,verify_user,get_current_user,update_banner_profile,delete_favorite
 from fastapi.security import OAuth2PasswordRequestForm
 from models.token import Token
 from datetime import timedelta
-
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 userRouter = APIRouter()
 
+ACCESS_TOKEN_EXPIRES_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRES_MINUTES"))
 
 @userRouter.post("/token",response_model=Token,tags=["Token"])
 def login_for_access_token(form_data:OAuth2PasswordRequestForm = Depends()):
