@@ -55,13 +55,14 @@ Make sure to create a Virtual Environments before installing packages
 ```
 *Windows*
 ```bash
-    .\env\Scripts\activate
+    \fullstack-anime-page\backend> .\env\Scripts\activate
 ```
 *Linux*
 
 ```bash
     source env/bin/activate
 ```
+*install packages*
 ```bash
     pip install -r requirements.txt
 ```
