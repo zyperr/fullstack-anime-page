@@ -1,6 +1,6 @@
 from typing import Optional,List
 from pydantic import BaseModel, Field
-
+from enum import Enum
 class User(BaseModel):
     username: str
     email: str
@@ -24,6 +24,10 @@ class UpdatePassword(BaseModel):
     new_password: str
     confirm_new_password:str
 
-
+class CollectionEnum(Enum):
+    animes:str = "animes"
+    mangas:str = "mangas"
+    manhwas:str = "manhwas"
+    
 
 

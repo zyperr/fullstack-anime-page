@@ -3,8 +3,8 @@ from fastapi import APIRouter,HTTPException,Depends,HTTPException
 from config.db import collection_user as collection
 from models.pagation import PaginationModel, get_pagination, pagination_params
 from schema.schemas import list_serial_users,serial_users,serial_user_with_hash
-from models.user import UpdatePassword, User
-from services.db_utils_user import add_favorite, delete_user, update_avatar_profile, update_password,get_one_user,save_user,get_username,create_access_token,verify_user,ACCESS_TOKEN_EXPIRES_MINUTES,get_current_user,update_banner_profile
+from models.user import UpdatePassword, User,CollectionEnum
+from services.db_utils_user import add_favorite, delete_user, update_avatar_profile, update_password,get_one_user,save_user,get_username,create_access_token,verify_user,ACCESS_TOKEN_EXPIRES_MINUTES,get_current_user,update_banner_profile,delete_favorite
 from fastapi.security import OAuth2PasswordRequestForm
 from models.token import Token
 from datetime import timedelta
@@ -75,14 +75,24 @@ def update_avatar(avatar:str = dict,current_user:User = Depends(get_current_user
     raise HTTPException(status_code=400,detail="Error updating avatar")
 
 @userRouter.post("/api/users/favorites/me",tags=["users"])
-def favorites(item_id:str,current_user:User = Depends(get_current_user)):
+def favorites(item_id:str,collection_name:CollectionEnum,current_user:User = Depends(get_current_user)):
     user_id = str(current_user["_id"])
-    response =  add_favorite(user_id,item_id)
+    response =  add_favorite(user_id,item_id,collection_name.value)
     if response:
         return response
     elif not current_user:
         raise HTTPException(status_code=401,detail="You need to have an account first")
     raise HTTPException(status_code=400,detail="Error adding to Favorites")
+
+@userRouter.delete("/api/users/favorites/me",tags=["users"])
+def detele_favorites(item_id:str,current_user:User = Depends(get_current_user)):
+    user_id = str(current_user["_id"])
+    response =  delete_favorite(user_id,item_id)
+    if response:
+        return response
+    elif not current_user:
+        raise HTTPException(status_code=401,detail="You need to have an account first")
+    raise HTTPException(status_code=400,detail="Error deleting from Favorites")
 
 @userRouter.put("/api/users/changed-password/me",tags=["users changed password"])
 def update_pwd(user:UpdatePassword,current_user:User = Depends(get_current_user)):

@@ -1,5 +1,5 @@
 from config.db import collection_user as collection
-from config.db import collection_anime as collection_anime
+from config.db import db
 from fastapi import HTTPException,Depends
 from fastapi.security import OAuth2PasswordBearer
 from bson import ObjectId
@@ -116,10 +116,9 @@ def update_avatar_profile(id:str,avatar) -> bool:
             )
     return True
 
-def add_favorite(id:str,item_id:str):
+def add_favorite(id:str,item_id:str,collection_name:str):
     user = collection.find_one({"_id":ObjectId(id)})
-    item = collection_anime.find_one({"_id":ObjectId(item_id)})
-    print(user["favorites"])
+    item = db[collection_name].find_one({"_id":ObjectId(item_id)})
     if item in user["favorites"]:
         raise HTTPException(status_code=409, detail="Item already in Favorites")
     elif user:
@@ -132,6 +131,24 @@ def add_favorite(id:str,item_id:str):
             }
         })
         return HTTPException(status_code=200, detail="Item added to Favorites")
+
+def delete_favorite(user_id:str,item_id:str):
+    user = collection.find_one({"_id":ObjectId(user_id)})
+    if user:        
+        collection.update_one({
+            "_id":ObjectId(user_id),
+        },
+        {
+            "$pull":{
+                "favorites":{
+                    "_id":ObjectId(item_id)
+                }
+            }
+        }                
+        )
+        return HTTPException(status_code=200, detail="Item deleted from Favorites")
+
+    raise HTTPException(status_code=404, detail="Item not found")
 
 def delete_user(id:str):
     if not collection.find_one({"_id":ObjectId(id)}):
