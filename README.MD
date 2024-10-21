@@ -131,9 +131,8 @@ Admin can will be able to modify an existing anime/manga or manhwa,certainly Adm
 ### 🔒 Admin
 
 
-<img src="./ReadmeImgs/admin_1.png" alt="Admin table />
-
-<img src="./ReadmeImgs/admin_2.png" alt="Admin create a new anime />
+<img src="./ReadmeImgs/admin_1.png" alt="admin table" />
+<img src="./ReadmeImgs/admin_2.png" alt="admin create new element" />
 
 
 ## Authors
