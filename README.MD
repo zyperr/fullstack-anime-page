@@ -95,35 +95,46 @@ Admin can will be able to modify an existing anime/manga or manhwa,certainly Adm
 #### Home
 
 ![Home Page]("./ReadmeImgs/home_1.png")
+<img src="./ReadmeImgs/home_1.png" alt="home page" />
 
 ![Home Page]("./ReadmeImgs/home_2.png")
+<img src="./ReadmeImgs/home_2.png" alt="home page list" />
 
 
 #### Login 
 
-![Login Page]("./ReadmeImgs/login_1.png")
+
+<img src="./ReadmeImgs/login_1.png" alt="Login page" />
+
 
 #### Register
 
-![register Page]("./ReadmeImgs/register_1.png")
+<img src="./ReadmeImgs/register_1.png" alt="register page" />
+
 
 #### Profile
 
-![Profile]("./ReadmeImgs/profile_1.png")
-![Profile]("./ReadmeImgs/profile_2.png")
-![Profile]("./ReadmeImgs/profile_3.png")
+
+<img src="./ReadmeImgs/profile_1.png" alt="profile" />
+<img src="./ReadmeImgs/profile_2.png" alt="profile banners" />
+<img src="./ReadmeImgs/profile_3.png" alt="profile avatars" />
+
+
 
 
 
 #### Favorites
- 
-![Favorites Page]("./ReadmeImgs/favorite_1.png")
+
+<img src="./ReadmeImgs/favorite_1.png" alt="Favorite page list" />
 
 
 ### 🔒 Admin
 
-![Admin table]("./ReadmeImgs/admin_1.png")
-![Admin create]("./ReadmeImgs/admin_2.png")
+
+<img src="./ReadmeImgs/admin_1.png" alt="Admin table />
+
+<img src="./ReadmeImgs/admin_2.png" alt="Admin create a new anime />
+
 
 ## Authors
 
