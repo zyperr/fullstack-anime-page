@@ -1,5 +1,5 @@
 from config.db import collection_user as collection
-from config.db import collection_anime as collection_anime
+from config.db import db
 from fastapi import HTTPException,Depends
 from fastapi.security import OAuth2PasswordBearer
 from bson import ObjectId
@@ -9,15 +9,16 @@ from datetime import datetime,timedelta
 from passlib.context import CryptContext
 from middlewares.regex import verify_pattern_user_data
 import random
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 server_url = "http://127.0.0.1:8000"
 default_avatars = ["/static/avatars/default-avatar-1.webp","/static/avatars/default-avatar-2.webp","/static/avatars/default-avatar-3.webp","/static/avatars/default-avatar-4.webp","/static/avatars/default-avatar-5.webp","/static/avatars/default-avatar-6.webp"]
 default_banners = ["/static/banners/default-banner-1.webp","/static/banners/default-banner-2.webp","/static/banners/default-banner-3.webp","static/banners/default-banner-4.webp"]
 
-SECRET_KEY = "83daa0256a2289b0fb23693bf1f6034d443966"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRES_MINUTES = 30
 
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
 
 pwd_contenxt = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -116,10 +117,9 @@ def update_avatar_profile(id:str,avatar) -> bool:
             )
     return True
 
-def add_favorite(id:str,item_id:str):
+def add_favorite(id:str,item_id:str,collection_name:str):
     user = collection.find_one({"_id":ObjectId(id)})
-    item = collection_anime.find_one({"_id":ObjectId(item_id)})
-    print(user["favorites"])
+    item = db[collection_name].find_one({"_id":ObjectId(item_id)})
     if item in user["favorites"]:
         raise HTTPException(status_code=409, detail="Item already in Favorites")
     elif user:
@@ -132,6 +132,24 @@ def add_favorite(id:str,item_id:str):
             }
         })
         return HTTPException(status_code=200, detail="Item added to Favorites")
+
+def delete_favorite(user_id:str,item_id:str):
+    user = collection.find_one({"_id":ObjectId(user_id)})
+    if user:        
+        collection.update_one({
+            "_id":ObjectId(user_id),
+        },
+        {
+            "$pull":{
+                "favorites":{
+                    "_id":ObjectId(item_id)
+                }
+            }
+        }                
+        )
+        return HTTPException(status_code=200, detail="Item deleted from Favorites")
+
+    raise HTTPException(status_code=404, detail="Item not found")
 
 def delete_user(id:str):
     if not collection.find_one({"_id":ObjectId(id)}):

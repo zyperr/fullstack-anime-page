@@ -4,9 +4,8 @@ import "../styles/components/displayAnimes.css"
 import { FaHeartBroken } from "react-icons/fa";
 
 
-
 export function DisplayAnimes({ img, title,type, isFavorite = false }) {
-    type = type.toUpperCase()
+    type = type?.toUpperCase()
     return (
         <div className="displayAnimes-section__container">
             <figure className="figure-container">

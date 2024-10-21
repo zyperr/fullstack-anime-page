@@ -14,11 +14,12 @@ import { AddAnime } from "./pages/Admin/Form/Create/AddAnime.jsx";
 import { Provider } from "./context/Provider";
 import { UserContext } from "./context/UserProvider.jsx";
 import { NotFound } from "./pages/error/NotFound.jsx";
-import { useEffect,useContext } from "react";
-import {FavoritePage } from "./pages/FavoritePage.jsx"
+import { useEffect, useContext } from "react";
+import { FavoritePage } from "./pages/FavoritePage.jsx"
 
 function App() {
-  const { user,fav } = useContext(UserContext);
+  const { user, fav } = useContext(UserContext);
+  console.log(user)
   const isAuth = () => {
     return user.role !== undefined;
   };
@@ -37,13 +38,12 @@ function App() {
           <Route path="/user/login" element=<Login /> />
           <Route path="user/register" element=<Register /> />
           <Route path="/:type/:title/:id" element=<AnimeDetails /> />
-          {user.role === "user" ||
-            (user.role === "admin" && (
-              <Route
-                path="/user/profile/:username/:id"
-                element=<Profile data={user} />
-              />
-            ))}
+
+          <Route
+            path="/user/profile/:username/:id"
+            element=<Profile data={user} />
+          />
+
           {user.role === "admin" && (
             <Route path="/admin/panel" element=<AdminPanel /> />
           )}
@@ -53,7 +53,7 @@ function App() {
           {user.role === "admin" && (
             <Route path="/admin/animes/add" element=<AddAnime /> />
           )}
-          <Route path="/user/favorites" element=<FavoritePage data={fav}/> />
+          <Route path="/user/favorites" element=<FavoritePage data={fav} /> />
           <Route path="*" element=<NotFound /> />
         </Routes>
       </Provider>

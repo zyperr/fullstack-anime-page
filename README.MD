@@ -1,4 +1,71 @@
 
+## Tech Stack
+
+**Client:** React, CSS , HTML
+
+**Server:** Python, FastAPI, MongoDB
+
+## 
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+
+`MONGO_PWD = your db password` 
+
+`MONGO_USER = your user ` 
+
+`SECRET_KEY = a ssh key or key`
+
+`ALGORITHM = a sequence of number,letter and symbols`
+
+`ACCESS_TOKEN_EXPIRES_MINUTES = a number` 
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/zyperr/fullstack-anime-page.git
+```
+
+Go to the project directory
+
+```bash
+  cd fullstack-anime-page
+```
+
+
+
+## Installation
+
+
+##### Frontend dependencies 
+```bash
+  cd .\client\
+  npm install
+```
+#### Backend dependencies
+ 
+Make sure to create a Virtual Environments before installing packages
+
+```bash
+    cd .\backend\
+    python -m venv env
+```
+*Windows*
+```bash
+    \fullstack-anime-page\backend> .\env\Scripts\activate
+```
+*Linux*
+
+```bash
+    source env/bin/activate
+```
+*install packages*
+```bash
+    pip install -r requirements.txt
+```
 # fullstack-anime-page
 
 #### 👽 User
@@ -12,25 +79,54 @@ Of course if you like to add some animes as favorites you could do this only if 
 
 Admin can will be able to modify an existing anime/manga or manhwa,certainly Admin have their own page for this and it only can be accessed if you're and administrador besides they can create animes/mangas and manhwas.
 ## 💻 Frontend
+## Color Reference
 
-## Screenshots
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Backgrounds | ![#303030](https://via.placeholder.com/10/303030?text=+) #303030 |
+| Text - Hover - Backgrounds items | ![#afa2ff](https://via.placeholder.com/10/afa2ff?text=+) #afa2ff |
+| Details | ![#f6e528](https://via.placeholder.com/10/f6e528?text=+) #f6e528 |
+| Background - Text  | ![#EAFDF8](https://via.placeholder.com/10/EAFDF8?text=+) #EAFDF8 |
+| Details for Text  | ![#bb93eb](https://via.placeholder.com/10/bb93eb?text=+) #bb93eb |
+
+
+### Screenshots
 
 #### Home
 
-![Home Page](https://cdn.discordapp.com/attachments/1208364888599175211/1220509509051617350/image.png?ex=660f330e&is=65fcbe0e&hm=c4884d4fa28eb3837aed92f16abb9785f77cd442c686b98263aa6a4a987d1ee0&)
+![Home Page]("./ReadmeImgs/home_1.png")
 
-![Home Page](https://cdn.discordapp.com/attachments/1208364888599175211/1220509011468619816/image.png?ex=660f3298&is=65fcbd98&hm=de2fb8d3a0ac9c0e0161f90b9afb1c0f875a87e80679a969be43f7035522f0af&)
+![Home Page]("./ReadmeImgs/home_2.png")
 
-![Home Page](https://cdn.discordapp.com/attachments/1208364888599175211/1220509270324416572/image.png?ex=660f32d6&is=65fcbdd6&hm=ee0184ab5e6af713b491ac08b9834c17d6ba0dace3e401c9cf723ee2c982e7e2&)
 
 #### Login 
 
-![Login Page](https://cdn.discordapp.com/attachments/1208364888599175211/1220510513050423380/image.png?ex=660f33fe&is=65fcbefe&hm=8382068481ab2f1ec24deeb964d45808ad718899539c030cc13ed3b9b4a3d014&)
+![Login Page]("./ReadmeImgs/login_1.png")
 
 #### Register
 
-![Login Page](https://cdn.discordapp.com/attachments/1208364888599175211/1220781019360264303/image.png?ex=66102fec&is=65fdbaec&hm=139e2ce16395427d01bf7f4f3986a5f4a4bf687b59b8910dc9b3e158dc910c27&)
+![register Page]("./ReadmeImgs/register_1.png")
+
+#### Profile
+
+![Profile]("./ReadmeImgs/profile_1.png")
+![Profile]("./ReadmeImgs/profile_2.png")
+![Profile]("./ReadmeImgs/profile_3.png")
 
 
 
+#### Favorites
+ 
+![Favorites Page]("./ReadmeImgs/favorite_1.png")
+
+
+### 🔒 Admin
+
+![Admin table]("./ReadmeImgs/admin_1.png")
+![Admin create]("./ReadmeImgs/admin_2.png")
+
+## Authors
+
+- [@zyperr](https://github.com/zyperr)
+- [@Irumau](https://github.com/Irumau)
 

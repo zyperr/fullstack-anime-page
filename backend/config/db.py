@@ -5,7 +5,8 @@ load_dotenv()
 
 PASSWORD = os.getenv("MONGO_PWD")
 USER  =os.getenv("MONGO_USER")
-URL = f"mongodb+srv://{USER}:{PASSWORD}@cluster0.shqzknu.mongodb.net/?retryWrites=true&w=majority&authSource=admin"
+URL =f"mongodb+srv://{USER}:{PASSWORD}@cluster0.shqzknu.mongodb.net/?retryWrites=true&w=majority&authSource=admin"
+
 
 client = MongoClient(URL)
 

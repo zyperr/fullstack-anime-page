@@ -1,19 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useApiAnimes } from "../hooks/useApiAnimes";
-import {useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Paragraph } from "../components/Paragraph";
-import { FaArrowAltCircleLeft,FaHeart,FaHeartBroken } from "react-icons/fa";
+import { FaArrowAltCircleLeft, FaHeart, FaHeartBroken } from "react-icons/fa";
 import "../styles/pages/animeDetails.css";
 import { Link } from "react-router-dom";
-import {UserContext} from "../context/UserProvider";
+import { UserContext } from "../context/UserProvider";
 function AnimeDetails() {
-  const  {fav}  = useContext(UserContext);
+  const { fav, setFav } = useContext(UserContext);
   const params = useParams();
   const [genres, setGenres] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  
-  const { getAnime, addToFavorites } = useApiAnimes();
-  const [data, setData] = useState({});
+
+  const { getAnime, addToFavorites, deleteFromFavorites } = useApiAnimes();
+  const [dataAnime, setDataAnime] = useState({});
   const [showBackBar, setShowBackBar] = useState(false);
   const [displayMessage, setDisplayMessage] = useState({
     state: false,
@@ -21,10 +21,10 @@ function AnimeDetails() {
     addClass: "",
   });
   useEffect(() => {
-    const item = fav.map((item) => item._id); 
+    const item = fav?.map((item) => item._id);
     setFavorites(item);
   }, [fav]);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -38,7 +38,7 @@ function AnimeDetails() {
   useEffect(() => {
     getAnime(`http://127.0.0.1:8000/api/${params.type}/`, params.id).then(
       ({ data }) => {
-        setData(data);
+        setDataAnime(data);
         setGenres(data.genres);
       }
     );
@@ -46,14 +46,14 @@ function AnimeDetails() {
 
   const handleFavorite = async () => {
     const { data, res } = await addToFavorites(
-      "http://127.0.0.1:8000/api/users/favorites/me",
       localStorage.getItem("token")?.toString(),
-      params.id
+      params.id,
+      params.type
     );
     if (res === 401) {
       setDisplayMessage({
         state: true,
-        message: data.detail,
+        message: "Need to be logged in to add to favorites",
         addClass: "error",
       });
       setTimeout(() => {
@@ -78,6 +78,34 @@ function AnimeDetails() {
         setDisplayMessage({ state: false, message: "", addClass: "" });
       }, 4000);
     }
+    setFavorites((prevState) => [...prevState, params.id]);
+    setFav((prevState) => [...prevState, dataAnime]);
+  };
+  const handleDelete = async () => {
+    const { data, res } = await deleteFromFavorites(
+      localStorage.getItem("token")?.toString(),
+      params.id
+    );
+    if (res === 400) {
+      setDisplayMessage({
+        state: true,
+        message: data.detail,
+        addClass: "error",
+      });
+      setTimeout(() => {
+        setDisplayMessage({ state: false, message: "", addClass: "" });
+      }, 4000);
+    }
+    setDisplayMessage({
+      state: true,
+      message: data.detail,
+      addClass: "success",
+    });
+    setTimeout(() => {
+      setDisplayMessage({ state: false, message: "", addClass: "" });
+    }, 4000);
+    setFavorites((prevState) => prevState.filter((item) => item !== params.id));
+    setFav((prevState) => prevState.filter((item) => item._id !== params.id));
   };
   return (
     <section className="anime__section" style={{ color: "#00000" }}>
@@ -96,32 +124,38 @@ function AnimeDetails() {
 
       <div
         className="anime__banner"
-        style={{ backgroundImage: `url(${data.img_url})` }}
+        style={{ backgroundImage: `url(${dataAnime.img_url})` }}
       ></div>
       <div className="anime__details">
-        <h2 className="anime__details-title">{data.title}</h2>
-        
-        <Paragraph>
-          {
-            favorites.includes(params.id) ? (
+        <h2 className="anime__details-title">
+          {dataAnime.title}
+          <Paragraph>
+            {favorites?.includes(params.id) ? (
               <FaHeartBroken
                 fontSize={20}
                 className="anime__details-fav"
-                onClick={handleFavorite}
+                onClick={handleDelete}
                 cursor={"pointer"}
               />
-            ) : ( 
+            ) : (
               <FaHeart
                 fontSize={20}
                 className="anime__details-fav"
                 onClick={handleFavorite}
                 cursor={"pointer"}
               />
-            )
-          }
-        </Paragraph>
-        <Paragraph text={data.status} className={"anime__details-status"} />
+            )}
+          </Paragraph>
+        </h2>
+
+        <Paragraph
+          text={dataAnime.status}
+          className={"anime__details-status"}
+        />
       </div>
+      <span className="anime__details-title-span">
+        episodes: {dataAnime.num_episodes}
+      </span>
       <article className="anime__genres">
         {genres?.map((genre) => (
           <span key={genre} className="anime__genre">
@@ -133,10 +167,9 @@ function AnimeDetails() {
         <h4>Synopsis</h4>
         <Paragraph
           className={"anime__synopsis-paragraph"}
-          text={data.synopsis}
+          text={dataAnime.synopsis}
         />
       </article>
-      <article className="anime__episodes">{/* proximo a completar */}</article>
     </section>
   );
 }
